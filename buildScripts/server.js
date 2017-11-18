@@ -12,18 +12,16 @@ const app = express();
 
 
 app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
+  noInfo: true,
+  publicPath: config.output.publicPath
 }));
 
 app.listen(port, function (error) {
-   if(error) {
-       console.log(error);
-   } else {
-       open(`http://localhost:${port}`)
-   }
+  if(error) {
+    console.log(error);
+  }
 });
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../src/index.html'));
+  res.sendFile(path.join(__dirname, '../src/index.html'));
 });
