@@ -7,20 +7,31 @@
     "dotenv-webpack": "^1.5.4",
     "express": "^4.16.2",
     "path": "^0.12.7",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
     "open": "0.0.5",
     "webpack": "^3.8.1",
     "webpack-dev-middleware": "^1.12.0"
   },
   "babel": {
     "presets": [
-      "es2015"
-    ]
+      "es2015",
+      "react"
+    ],
+    "env": {
+      "presets": [
+        "react-hmre"
+      ]
+    }
   },
   "scripts": {
     "start": "babel-node buildScripts/server.js"
@@ -30,5 +41,5 @@
     "Spotify"
   ],
   "author": "Sarah Trowbridge",
-  "license": "ISC"
+  "license": "MIT"
 }

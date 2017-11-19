@@ -9,19 +9,24 @@ export default {
   entry: [
     path.resolve(__dirname, 'src/index.js')
   ],
+  target: 'web',
+  output: {
+    path: path.resolve(__dirname, 'src'),
+    publicPath: '/',
+    filename: 'bundle.js'
+  },
+  module: {
+    loaders: [
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader'] }
+    ]
+  },
   node: {
     fs: 'empty'
   },
   plugins: [
     new Dotenv({
       path: './.env',
-      systemvars: true, 
+      systemvars: true,
     })
   ],
-
-  output: {
-    path: path.resolve(__dirname, 'src'),
-    publicPath: '/',
-    filename: 'bundle.js'
-  }
 }
