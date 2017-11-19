@@ -9,11 +9,7 @@ class Image extends Component {
 
     this.state = {
       image: {
-              'copyright': 'blank',
-              'date': 'blank',
-              'explanation': 'blank',
-              'title': 'blank',
-              'url': 'blank'
+
             }
     };
 
@@ -36,18 +32,18 @@ class Image extends Component {
       .then(parseJSON)
       .then((data) => {
         // spread operator needs plugin to work
-        // let prevState = this.state.image;
+        let prevState = this.state.image;
         // prevState['title'] = data.title;
-        // this.setState(prevState => ({
-        //   image: {
-        //     ...prevState,
-        //     date: data.date
-        //   };
-        // }));
-
-        let image = Object.assign({}, this.state.image);
-        image.date = data.date;
-        this.setState({image});
+        this.setState(prevState => ({
+          image: {
+            ...prevState,
+            title: data.title,
+            date: data.date,
+            copyright: data.copyright,
+            explanation: data.explanation,
+            url: data.hdurl,
+          }
+        }));
         console.log(data)
       }).catch(function(error) {
         console.log('request failed', error)
