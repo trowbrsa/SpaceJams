@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import styles from '../styles.css';
+
 require('dotenv').config();
 
 const API_KEY = process.env.NASA_KEY;
@@ -35,9 +37,11 @@ class Image extends Component {
             date: data.date,
             copyright: data.copyright,
             explanation: data.explanation,
-            url: data.hdurl,
+            hdurl: data.hdurl,
+            url: data.url,
           }
         }));
+        console.log(data);
       }).catch(function(error) {
         console.log('request failed', error)
       })
@@ -46,11 +50,11 @@ class Image extends Component {
   render(){
     return (
       <div className="imageContainer">
-        <p>{this.state.image.date}</p>
-        <p>{this.state.image.title}</p>
+        <h3><img src={this.state.image.hdurl}/></h3>
+        <h1>{this.state.image.title}</h1>
+        <h3>{this.state.image.date}</h3>
         <p>{this.state.image.explanation}</p>
-        <p>{this.state.url}</p>
-        <p>{this.state.copyright}</p>
+        <p>{this.state.image.copyright}</p>
       </div>
     )
   }

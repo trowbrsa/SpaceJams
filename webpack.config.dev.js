@@ -23,6 +23,11 @@ export default {
         query: {
           presets:[ 'es2015', 'react', 'stage-2' ]
         }
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader'],
+        include: __dirname + '/src'
       }
     ]
   },
