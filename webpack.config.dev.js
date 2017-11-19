@@ -1,4 +1,3 @@
-import webpack from 'webpack'
 import path from 'path'
 
 const Dotenv = require('dotenv-webpack');

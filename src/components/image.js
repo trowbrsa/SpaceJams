@@ -7,11 +7,7 @@ class Image extends Component {
   constructor(props){
     super(props);
 
-    this.state = {
-      image: {
-
-            }
-    };
+    this.state = { image: {} };
 
     function checkStatus(response) {
       if (response.status >= 200 && response.status < 300) {
@@ -31,9 +27,7 @@ class Image extends Component {
       .then(checkStatus)
       .then(parseJSON)
       .then((data) => {
-        // spread operator needs plugin to work
         let prevState = this.state.image;
-        // prevState['title'] = data.title;
         this.setState(prevState => ({
           image: {
             ...prevState,
@@ -44,16 +38,19 @@ class Image extends Component {
             url: data.hdurl,
           }
         }));
-        console.log(data)
       }).catch(function(error) {
         console.log('request failed', error)
       })
-  }
+    }
 
   render(){
     return (
       <div className="imageContainer">
-        {this.state.image.date}
+        <p>{this.state.image.date}</p>
+        <p>{this.state.image.title}</p>
+        <p>{this.state.image.explanation}</p>
+        <p>{this.state.url}</p>
+        <p>{this.state.copyright}</p>
       </div>
     )
   }
