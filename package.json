@@ -9,6 +9,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "dotenv-webpack": "^1.5.4",
     "express": "^4.16.2",
+    "node-fetch": "^1.7.3",
     "path": "^0.12.7",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",

@@ -13,14 +13,15 @@ const document = {
 };
 
 // Detects the sentiment of the text client
-  .analyzeSentiment({document: document})
-  .then(results => {
-    const sentiment = results[0].documentSentiment;
+  client
+    .analyzeSentiment({document: document})
+    .then(results => {
+      const sentiment = results[0].documentSentiment;
 
-    console.log(`Text: ${text}`);
-    console.log(`Sentiment score: ${sentiment.score}`);
-    console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
+      console.log(`Text: ${text}`);
+      console.log(`Sentiment score: ${sentiment.score}`);
+      console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });

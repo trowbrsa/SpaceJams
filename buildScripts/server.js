@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import open from 'open';
+import {main} from '../src/api/api.js';
 
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
@@ -23,5 +24,6 @@ app.listen(port, function (error) {
 });
 
 app.get('/', function (req, res) {
+  main();
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
