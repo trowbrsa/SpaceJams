@@ -64,14 +64,7 @@ function callNLPLibrary() {
 function callSpotifyApi(){
 
   let payload = SPOTIFY_ID + ":" + SPOTIFY_SECRET;
-
-  console.log("This is just the secrets", payload)
-
   let encodedPayload = new Buffer(payload).toString("base64");
-
-  //let data = JSON.stringify("grant_type=client_credentials");
-  //console.log(data);
-  //onsole.log("this is the the authentication: ", authentication);
 
   axios({
     url: 'https://accounts.spotify.com/api/token',
@@ -81,23 +74,40 @@ function callSpotifyApi(){
     },
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': "Basic " + encodedPayload
+      'Authorization': 'Basic ' + encodedPayload
     },
   })
+  .then((response) => {
+    let token = response.data.access_token;
 
-  // fetch('https://accounts.spotify.com/api/token', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Authorization': authentication,
-  //     'Content-Type' : 'application/x-www-form-urlencoded',
-  //   },
-  //   body: data
-  // })
-  .then((data) => {
-    console.log(data);
+    // const BASE_URL = 'https://api.spotify.com/v1/search?';
+    // const FETCH_URL = BASE_URL + 'q=' + 'space';
+    //
+    // let myOptions = {
+    //   method: 'GET',
+    //   headers:  {
+    //     'Authorization': 'Bearer ' + token
+    //  },
+    //   mode: 'cors',
+    //   cache: 'default'
+    // };
+
+    //fetch(FETCH_URL, myOptions)
+    axios.get('https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6', {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
   }).catch(function(error) {
-    console.log('request failed', error)
-  })
+      console.log('request failed', error)
+    })
 }
 
 
