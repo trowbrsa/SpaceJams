@@ -43,9 +43,9 @@ class Image extends Component {
         }));
         console.log(data);
       }).catch(function(error) {
-        console.log('request failed', error)
-      })
-    }
+          console.log('request failed', error)
+        })
+      }
 
   render(){
     return (

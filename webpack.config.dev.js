@@ -40,4 +40,9 @@ export default {
       systemvars: true,
     })
   ],
+  devServer: {
+    headers: {
+        'Access-Control-Allow-Origin': '*'
+    }
+  }
 }

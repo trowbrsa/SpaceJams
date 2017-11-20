@@ -4,6 +4,8 @@
   "description": "A simple app that utilizes NASA's Image of the Day and natural language processing to pair it with a corresponding song using the Spotify API.",
   "main": "index.js",
   "dependencies": {
+    "@google-cloud/language": "^1.1.0",
+    "axios": "^0.17.1",
     "babel-preset-stage-2": "^6.24.1",
     "dotenv-webpack": "^1.5.4",
     "express": "^4.16.2",
@@ -26,7 +28,8 @@
     "open": "0.0.5",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
-    "webpack-dev-middleware": "^1.12.0"
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.9.4"
   },
   "babel": {
     "presets": [

@@ -1,9 +1,4 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Image from './components/image';
-import Track from './components/track';
-
-//Imports the Google Cloud client library
+// Imports the Google Cloud client library
 const language = require('@google-cloud/language');
 
 // Instantiates a client
@@ -18,7 +13,7 @@ const document = {
 };
 
 // Detects the sentiment of the text client
-client.analyzeSentiment({document: document})
+  .analyzeSentiment({document: document})
   .then(results => {
     const sentiment = results[0].documentSentiment;
 
@@ -29,15 +24,3 @@ client.analyzeSentiment({document: document})
   .catch(err => {
     console.error('ERROR:', err);
   });
-
-class App extends Component {
-  render(){
-    return(
-      <div>
-       test
-      </div>
-    )
-  }
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
