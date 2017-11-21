@@ -9,11 +9,10 @@
     "babel-preset-stage-2": "^6.24.1",
     "dotenv-webpack": "^1.5.4",
     "express": "^4.16.2",
-    "node-fetch": "^1.7.3",
+    "jsonfile": "^4.0.0",
     "path": "^0.12.7",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1",
-    "whatwg-fetch": "^2.0.3"
+    "react-dom": "^16.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

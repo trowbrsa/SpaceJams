@@ -1,15 +1,37 @@
-const language = require('@google-cloud/language');
-// choose one http library
-const fetch = require('node-fetch');
-import axios from 'axios';
-const client = new language.LanguageServiceClient();
 require('dotenv').config();
+
+import axios from 'axios';
+const language = require('@google-cloud/language');
+const client = new language.LanguageServiceClient();
+const jsonFile = require('jsonfile');
 
 const NASA_API_KEY = process.env.NASA_KEY;
 const SPOTIFY_ID = process.env.SPOTIFY_ID;
 const SPOTIFY_SECRET = process.env.SPOTIFY_SECRET;
 
-// how do we get this file to be called when we hit our app
+const file = './dailyData.json';
+
+let apiData = {};
+
+function callAPI() {
+  axios.get(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
+  .then(checkStatus)
+  .then((response) => {
+    let data = response.data;
+    apiData.image_data =
+      {'date': data.date}
+    ;
+    jsonFile.writeFile(file, apiData, function (err){
+      console.log(err)
+    })
+    //console.log("now calling NLP");
+    // callNLPLibrary();
+    //callSpotifyApi();
+  // }).catch(function(error) {
+  //     console.log('request failed', error)
+    })
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response
@@ -18,24 +40,6 @@ function checkStatus(response) {
     error.response = response
     throw error
   }
-}
-
-function parseJSON(response) {
-  return response.json()
-}
-
-function callAPI() {
-  // fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
-  // .then(checkStatus)
-  // .then(parseJSON)
-  // .then((data) => {
-  //   console.log(data);
-    //console.log("now calling NLP");
-    // callNLPLibrary();
-    callSpotifyApi();
-  // }).catch(function(error) {
-  //     console.log('request failed', error)
-  //   })
 }
 
 function callNLPLibrary() {
@@ -79,32 +83,17 @@ function callSpotifyApi(){
   })
   .then((response) => {
     let token = response.data.access_token;
-    console.log("here is token", token);
 
-    const BASE_URL = 'https://api.spotify.com/v1/search?';
-    const FETCH_URL = BASE_URL + 'q=' + 'space&type=artist';
-
-    let myOptions = {
-      method: 'GET',
-      headers:  {
+    axios.get('https://api.spotify.com/v1/search?q=space&type=artist', {
+      headers: {
         'Authorization': 'Bearer ' + token
-     },
-      mode: 'cors',
-      cache: 'default'
-    };
-
-    fetch(FETCH_URL, myOptions)
-    // axios.get('https://api.spotify.com/v1/search?q=space', {
-    //   headers: {
-    //     'Authorization': 'Bearer ' + token
-    //   }
-    // })
-    .then(response => response.json())
-    .then(json => console.log(json))
+      }
     })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  .then(response => console.log(response.data))
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
 }
 
 
