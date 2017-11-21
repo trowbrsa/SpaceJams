@@ -79,35 +79,32 @@ function callSpotifyApi(){
   })
   .then((response) => {
     let token = response.data.access_token;
+    console.log("here is token", token);
 
-    // const BASE_URL = 'https://api.spotify.com/v1/search?';
-    // const FETCH_URL = BASE_URL + 'q=' + 'space';
-    //
-    // let myOptions = {
-    //   method: 'GET',
-    //   headers:  {
-    //     'Authorization': 'Bearer ' + token
-    //  },
-    //   mode: 'cors',
-    //   cache: 'default'
-    // };
+    const BASE_URL = 'https://api.spotify.com/v1/search?';
+    const FETCH_URL = BASE_URL + 'q=' + 'space&type=artist';
 
-    //fetch(FETCH_URL, myOptions)
-    axios.get('https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6', {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    let myOptions = {
+      method: 'GET',
+      headers:  {
         'Authorization': 'Bearer ' + token
-      }
-    })
-    .then((response) => {
-      console.log(response);
+     },
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    fetch(FETCH_URL, myOptions)
+    // axios.get('https://api.spotify.com/v1/search?q=space', {
+    //   headers: {
+    //     'Authorization': 'Bearer ' + token
+    //   }
+    // })
+    .then(response => response.json())
+    .then(json => console.log(json))
     })
     .catch(err => {
       console.error('ERROR:', err);
     });
-  }).catch(function(error) {
-      console.log('request failed', error)
-    })
 }
 
 
