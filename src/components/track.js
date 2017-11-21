@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from '../styles.css';
 
 class Track extends Component {
   constructor(props){
@@ -9,7 +10,7 @@ class Track extends Component {
   render(){
     return (
       <div className="trackContainer">
-        This is where the track will go
+        <iframe src='https://embed.spotify.com/?uri=spotify%3Aalbum%3A2DCzgO12HyMeGxoQlbtvQV' width='75' height='200' frameborder='0' allowtransparency='true'></iframe>
       </div>
     )
   }

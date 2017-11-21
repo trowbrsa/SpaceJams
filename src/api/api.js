@@ -19,8 +19,14 @@ function callAPI() {
   .then((response) => {
     let data = response.data;
     apiData.image_data =
-      {'date': data.date}
-    ;
+      {
+        'date': data.date,
+        'copyright': data.copyright,
+        'title': data.title,
+        'explanation': data.explanation,
+        'hdurl': data.hdurl,
+        'url': data.url
+      };
     jsonFile.writeFile(file, apiData, function (err){
       console.log(err)
     })
@@ -89,7 +95,6 @@ function callSpotifyApi(){
         'Authorization': 'Bearer ' + token
       }
     })
-  .then(response => console.log(response.data))
   })
   .catch(err => {
     console.error('ERROR:', err);

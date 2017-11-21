@@ -4,10 +4,13 @@ import Image from './components/image';
 import Track from './components/track';
 
 class App extends Component {
+  // verify if parent should own state
+
   render(){
     return(
       <div>
-       a plain hello
+       <Image />
+       <Track />
       </div>
     )
   }
