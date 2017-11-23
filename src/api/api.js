@@ -1,15 +1,13 @@
-require('dotenv').config();
-
 import axios from 'axios';
 const language = require('@google-cloud/language');
 const client = new language.LanguageServiceClient();
 const jsonFile = require('jsonfile');
-
 const NASA_API_KEY = process.env.NASA_KEY;
 const SPOTIFY_ID = process.env.SPOTIFY_ID;
 const SPOTIFY_SECRET = process.env.SPOTIFY_SECRET;
-
 const file = './dailyData.json';
+
+require('dotenv').config();
 
 let apiData = {};
 
@@ -27,14 +25,12 @@ function callAPI() {
         'hdurl': data.hdurl,
         'url': data.url
       };
-    // jsonFile.writeFile(file, apiData, function (err){
-    //   console.log(err)
+
     callNLPLibrary(data.title, data.explanation);
-    })
-    //callSpotifyApi();
-  // }).catch(function(error) {
-  //     console.log('request failed', error)
-    // })
+  })
+  .catch(function(error) {
+    console.log('request failed', error)
+  })
 }
 
 function checkStatus(response) {
@@ -55,7 +51,6 @@ function callNLPLibrary(title, explanation) {
     type: 'PLAIN_TEXT',
   };
 
-// Detects the sentiment of the text client
   client
     .analyzeEntities({document: document})
     .then(results => {
@@ -93,11 +88,14 @@ function callSpotifyApi(test){
       }
     })
     .then(function(response){
-      console.log(response.data.tracks.items);
+      apiData.track_data = response.data.tracks.items[0].album.uri;
+      jsonFile.writeFile(file, apiData, function (err){
+        console.log('error with writing JSON: ', err)
+      })
     })
   })
   .catch(err => {
-    console.error('ERROR:', err);
+    console.error('ERROR:', err)
   });
 }
 

@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Image from './components/image';
-import Track from './components/track';
+import Image from './components/Image';
+import Track from './components/Track';
+import data from '../dailyData.json';
 
 class App extends Component {
-  // verify if parent should own state
+  constructor(props){
+    super(props)
+
+    this.state = {
+      image: data.image_data.hdurl,
+      track: data.track_data
+    }
+  }
+
 
   render(){
     return(
       <div>
-       <Image />
-       <Track />
+       <Image image={this.state.image}/>
+       <Track track={this.state.track}/>
       </div>
     )
   }

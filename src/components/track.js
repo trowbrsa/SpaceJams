@@ -4,13 +4,13 @@ import styles from '../styles.css';
 class Track extends Component {
   constructor(props){
     super(props);
-
-  }
+    let track = this.props.track;
+  };
 
   render(){
     return (
       <div className="trackContainer">
-        <iframe src='https://embed.spotify.com/?uri=spotify%3Aalbum%3A2DCzgO12HyMeGxoQlbtvQV' width='75' height='200' frameBorder='0' allowtransparency='true'></iframe>
+        <iframe src={`https://embed.spotify.com/?uri=${this.props.track}`} width='75' height='200' frameBorder='0' allowtransparency='true'></iframe>
       </div>
     )
   }
