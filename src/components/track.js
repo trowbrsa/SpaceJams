@@ -10,7 +10,7 @@ class Track extends Component {
   render(){
     return (
       <div className="trackContainer">
-        <iframe src='https://embed.spotify.com/?uri=spotify%3Aalbum%3A2DCzgO12HyMeGxoQlbtvQV' width='75' height='200' frameborder='0' allowtransparency='true'></iframe>
+        <iframe src='https://embed.spotify.com/?uri=spotify%3Aalbum%3A2DCzgO12HyMeGxoQlbtvQV' width='75' height='200' frameBorder='0' allowtransparency='true'></iframe>
       </div>
     )
   }

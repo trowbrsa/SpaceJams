@@ -27,15 +27,16 @@ function callAPI() {
         'hdurl': data.hdurl,
         'url': data.url
       };
-    jsonFile.writeFile(file, apiData, function (err){
-      console.log(err)
+    // jsonFile.writeFile(file, apiData, function (err){
+    //   console.log(err)
     })
+    .then(callNLPLibrary)
     //console.log("now calling NLP");
     // callNLPLibrary();
     //callSpotifyApi();
   // }).catch(function(error) {
   //     console.log('request failed', error)
-    })
+    // })
 }
 
 function checkStatus(response) {
