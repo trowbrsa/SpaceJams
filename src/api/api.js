@@ -29,10 +29,8 @@ function callAPI() {
       };
     // jsonFile.writeFile(file, apiData, function (err){
     //   console.log(err)
+    callNLPLibrary(data.title, data.explanation);
     })
-    .then(callNLPLibrary)
-    //console.log("now calling NLP");
-    // callNLPLibrary();
     //callSpotifyApi();
   // }).catch(function(error) {
   //     console.log('request failed', error)
@@ -49,8 +47,8 @@ function checkStatus(response) {
   }
 }
 
-function callNLPLibrary() {
-  const text = 'Space Jams';
+function callNLPLibrary(title, explanation) {
+  const text = title + explanation;
 
   const document = {
     content: text,
@@ -59,20 +57,18 @@ function callNLPLibrary() {
 
 // Detects the sentiment of the text client
   client
-    .analyzeSentiment({document: document})
+    .analyzeEntities({document: document})
     .then(results => {
-      const sentiment = results[0].documentSentiment;
-
-      console.log(`Text: ${text}`);
-      console.log(`Sentiment score: ${sentiment.score}`);
-      console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
+      const entities = results[0].entities;
+      let testEntity = entities[0].name;
+      callSpotifyApi(testEntity);
     })
     .catch(err => {
       console.error('ERROR:', err);
     });
 }
 
-function callSpotifyApi(){
+function callSpotifyApi(test){
 
   let payload = SPOTIFY_ID + ":" + SPOTIFY_SECRET;
   let encodedPayload = new Buffer(payload).toString("base64");
@@ -91,10 +87,13 @@ function callSpotifyApi(){
   .then((response) => {
     let token = response.data.access_token;
 
-    axios.get('https://api.spotify.com/v1/search?q=space&type=artist', {
+    axios.get(`https://api.spotify.com/v1/search?q=${test}&type=track`, {
       headers: {
         'Authorization': 'Bearer ' + token
       }
+    })
+    .then(function(response){
+      console.log(response.data.tracks.items);
     })
   })
   .catch(err => {
