@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../styles.css';
+import PropTypes from 'prop-types';
 
 class Image extends Component {
   constructor(props){
@@ -13,6 +13,10 @@ class Image extends Component {
       </div>
     )
   }
+}
+
+Image.propTypes = {
+  image: PropTypes.string
 }
 
 export default Image;
