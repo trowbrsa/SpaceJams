@@ -1,13 +1,15 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
+import jsonFile from 'jsonfile';
+dotenv.config();
+
 const language = require('@google-cloud/language');
 const client = new language.LanguageServiceClient();
-const jsonFile = require('jsonfile');
+const file = './dailyData.json';
+
 const NASA_API_KEY = process.env.NASA_KEY;
 const SPOTIFY_ID = process.env.SPOTIFY_ID;
 const SPOTIFY_SECRET = process.env.SPOTIFY_SECRET;
-const file = './dailyData.json';
-
-require('dotenv').config();
 
 let apiData = {};
 
