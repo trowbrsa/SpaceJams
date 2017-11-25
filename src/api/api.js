@@ -36,6 +36,7 @@ function callAPI() {
 }
 
 function callNLPLibrary(title, explanation) {
+  console.log("here is the text Google will process: ", title, explanation);
   const text = title + explanation;
 
   const document = {
@@ -46,21 +47,15 @@ function callNLPLibrary(title, explanation) {
   client
     .analyzeEntities({document: document})
     .then(results => {
-      const entities = results[0].entities;
-      const processedData = entities[0].name;
-      // could also continue doing the call here while there is apiData
-      // until we get a response with album or tracks
-      // keep iterating thorugh entities, then use the default song
-      console.log("response from Google", entities);
+      const processedData = results[0].entities;
       callSpotifyApi(processedData);
     })
     .catch(err => {
-      console.error('ERROR:', err);
+      console.error('Error from Google: ', err);
     });
 }
 
 function callSpotifyApi(processedData) {
-
   let payload = SPOTIFY_ID + ":" + SPOTIFY_SECRET;
   let encodedPayload = new Buffer(payload).toString("base64");
 
@@ -77,29 +72,60 @@ function callSpotifyApi(processedData) {
   })
   .then(response => {
     let token = response.data.access_token;
+    let foundSong = false;
+    let song = '';
 
-    axios.get(`https://api.spotify.com/v1/search?q=${processedData}&type=track`, {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-    .then(response => {
-      console.log("spotify response: ", response.data);
-      // check first if there are albums
-      // if no albums, get check if there are tracks
-      // if there are tracks, check if tracks.items.length > 0
-      // if not, then use the default song.
-      apiData.track_data = response.data.tracks.items[0].album.uri;
-      jsonFile.writeFile(file, apiData, function (err){
-        console.log('error with writing JSON: ', err)
+    // function findSong(foundSong){
+    //   getSong(foundSong, function)
+    // }
+    /// async stuff needs to happen here
+
+    processedData.map(entity => {
+      let songSearchTerm = entity.name;
+      axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
+        headers: { 'Authorization': 'Bearer ' + token }
       })
-    }).catch(err => {
-      console.error('Error in call response from Spotify:', err)
-    });
+      .then(response => {
+        if('tracks' in response.data){
+          if(response.data.tracks.items.length > 0){
+            if('album' in response.data.tracks.items[0]){
+              function callback(){
+                song = response.data.tracks.items[0].uri;
+                console.log("here is our song!", song);
+                foundSong = true;
+                console.log("found is true", foundSong);
+              }
+
+              // here is our success, 200 function.
+              // when this happens, needs to get passed to another function
+              // which will then stop the process.
+              // add default song in case of else
+            }
+          }
+        }
+      })
+    })
   })
-  .catch(err => {
-    console.error('ERROR:', err)
-  });
+    // write to JSON.
+
+    // axios.get(`https://api.spotify.com/v1/search?q=${processedData}&type=track`, {
+    //   headers: {
+    //     'Authorization': 'Bearer ' + token
+    //   }
+    // })
+    // .then(response => {
+    //   console.log("spotify response: ", response.data);
+    //   apiData.track_data = response.data.tracks.items[0].album.uri;
+    //   jsonFile.writeFile(file, apiData, function (err){
+    //     console.log('error with writing JSON: ', err)
+    //   })
+    // }).catch(err => {
+    //   console.error('Error in call response from Spotify:', err)
+    // });
+  // })
+  // .catch(err => {
+  //   console.error('ERROR:', err)
+  // });
 }
 
 
