@@ -72,41 +72,34 @@ function callSpotifyApi(processedData) {
   })
   .then(response => {
     let token = response.data.access_token;
-    let foundSong = false;
-    let song = '';
 
-    // function findSong(foundSong){
-    //   getSong(foundSong, function)
-    // }
-    /// async stuff needs to happen here
-
-    processedData.map(entity => {
-      let songSearchTerm = entity.name;
-      axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
-        headers: { 'Authorization': 'Bearer ' + token }
-      })
-      .then(response => {
-        if('tracks' in response.data){
-          if(response.data.tracks.items.length > 0){
-            if('album' in response.data.tracks.items[0]){
-              function callback(){
-                song = response.data.tracks.items[0].uri;
-                console.log("here is our song!", song);
-                foundSong = true;
-                console.log("found is true", foundSong);
-              }
-
-              // here is our success, 200 function.
-              // when this happens, needs to get passed to another function
-              // which will then stop the process.
-              // add default song in case of else
-            }
+    let getSong = function(entity){
+      return new Promise(function(resolve, reject) {
+        let songSearchTerm = entity.name;
+        let song = '';
+        axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
+          headers: { 'Authorization': 'Bearer ' + token }
+        })
+        .then(response => {
+          if('album' in response.data.tracks.items[0]){
+              song = response.data.tracks.items[0].uri;
+              console.log("here is our song!", song);
+              resolve("found is true", foundSong);
+          } else {
+            reject(Error("It broke"));
           }
-        }
+        })
       })
-    })
+    }
+
+    let foundSong = false;
+    for(entity in processedData){
+      getSong(entity).then(response => {
+        console.log(response);
+        // write to JSON.
+      })
+    }
   })
-    // write to JSON.
 
     // axios.get(`https://api.spotify.com/v1/search?q=${processedData}&type=track`, {
     //   headers: {
