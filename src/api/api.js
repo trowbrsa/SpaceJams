@@ -1,4 +1,5 @@
 import axios from 'axios';
+import async from 'async';
 import dotenv from 'dotenv';
 import jsonFile from 'jsonfile';
 
@@ -83,42 +84,22 @@ function callSpotifyApi(processedData) {
         .then(response => {
           if('album' in response.data.tracks.items[0]){
               song = response.data.tracks.items[0].uri;
-              console.log("here is our song!", song);
-              resolve("found is true", foundSong);
+              return resolve("here is the song :", song);
           } else {
-            reject(Error("It broke"));
+            reject(Error("There is no song"));
           }
+        })
+        .catch(error => {
+          console.log("error with spotify", error)
         })
       })
     }
 
     let foundSong = false;
-    for(entity in processedData){
-      getSong(entity).then(response => {
-        console.log(response);
-        // write to JSON.
-      })
-    }
-  })
+    // do some error handling if song is not found.
+    processedData.find(getSong);
 
-    // axios.get(`https://api.spotify.com/v1/search?q=${processedData}&type=track`, {
-    //   headers: {
-    //     'Authorization': 'Bearer ' + token
-    //   }
-    // })
-    // .then(response => {
-    //   console.log("spotify response: ", response.data);
-    //   apiData.track_data = response.data.tracks.items[0].album.uri;
-    //   jsonFile.writeFile(file, apiData, function (err){
-    //     console.log('error with writing JSON: ', err)
-    //   })
-    // }).catch(err => {
-    //   console.error('Error in call response from Spotify:', err)
-    // });
-  // })
-  // .catch(err => {
-  //   console.error('ERROR:', err)
-  // });
+  })
 }
 
 
