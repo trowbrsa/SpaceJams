@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Image from './components/Image';
 import Track from './components/Track';
+import InformationIcon from './components/InformationIcon';
 import data from '../dailyData.json';
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
       <div>
        <Image image={this.state.image}/>
        <Track track={this.state.track}/>
+       <InformationIcon />
       </div>
     )
   }

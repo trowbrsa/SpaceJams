@@ -86,13 +86,9 @@ function callSpotifyApi(processedData) {
                 console.log("we have a song!");
                 let song = response.data.tracks.items[0].uri;
                 apiData.track_data = song;
-                console.log("here is API data", apiData);
-                jsonFile.writeFile(file, apiData);
+                //jsonFile.writeFile(file, apiData);
                 return resolve();
             }
-          } else {
-            //set to default at end of all calls
-            console.log("There is no song");
           }
         })
         .catch(error => {
@@ -103,7 +99,7 @@ function callSpotifyApi(processedData) {
 
     // do some error handling if song is not found.
     // right now this is returning the stuff from Google.
-    processedData.find(getSong);
+    console.log("here is returned value from processedData", processedData.find(getSong));
   })
 }
 

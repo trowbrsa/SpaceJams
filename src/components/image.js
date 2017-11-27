@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styles from '../styles.css';
 
 class Image extends Component {
   constructor(props){
@@ -9,7 +10,7 @@ class Image extends Component {
   render(){
     return (
       <div className="imageContainer">
-        <h3><img src={this.props.image}/></h3>
+        <img src={this.props.image}/>
       </div>
     )
   }

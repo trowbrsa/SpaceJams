@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styles from '../styles.css';
 
 class Track extends Component {
   constructor(props){
@@ -9,7 +10,7 @@ class Track extends Component {
   render(){
     return (
       <div className="trackContainer">
-        <iframe src={`https://embed.spotify.com/?uri=${this.props.track}`} width='75' height='200' frameBorder='0'></iframe>
+        <iframe src={`https://embed.spotify.com/?uri=${this.props.track}`} width='75' height='75' frameBorder='0'></iframe>
       </div>
     )
   }
