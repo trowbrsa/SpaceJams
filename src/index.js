@@ -21,7 +21,8 @@ class App extends Component {
       <div>
        <Image image={this.state.image}/>
        <Track track={this.state.track}/>
-       <InformationIcon />
+         <InformationIcon />
+
       </div>
     )
   }

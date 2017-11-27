@@ -2,7 +2,7 @@ h1 {
 font-family: 'Spectral SC', serif;
 }
 
-img{/* Set rules to fill background */
+.imageContainer {/* Set rules to fill background */
   min-height: 100%;
   min-width: 1024px;
 
@@ -20,4 +20,8 @@ img{/* Set rules to fill background */
   position: fixed;
   bottom: 0;
   left: 0;
+}
+
+.infoIcon {
+  position: fixed;
 }
