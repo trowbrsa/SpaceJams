@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Image from './components/Image';
 import Track from './components/Track';
 import InformationIcon from './components/InformationIcon';
+import InformationModal from './components/InformationModal'
 import data from '../dailyData.json';
 
 class App extends Component {
@@ -11,18 +12,30 @@ class App extends Component {
 
     this.state = {
       image: data.image_data.hdurl,
-      track: data.track_data
+      track: data.track_data,
+      isModalOpen: false,
     }
+  }
+
+  toggleModal = () => {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    });
   }
 
 
   render(){
     return(
       <div>
-       <Image image={this.state.image}/>
-       <Track track={this.state.track}/>
-         <InformationIcon />
-
+        <Image image={this.state.image}/>
+        <button className='informationModal'
+          onClick={this.toggleModal}>
+          Learn more
+        </button>
+        <Track track={this.state.track}/>
+       <InformationModal
+        show={this.state.isModalOpen}
+        onClose={this.toggleModal} />
       </div>
     )
   }
