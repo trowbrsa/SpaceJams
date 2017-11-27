@@ -37,7 +37,6 @@ function callAPI() {
 }
 
 function callNLPLibrary(title, explanation) {
-  console.log("here is the text Google will process: ", title, explanation);
   const text = title + explanation;
 
   const document = {
@@ -82,11 +81,18 @@ function callSpotifyApi(processedData) {
           headers: { 'Authorization': 'Bearer ' + token }
         })
         .then(response => {
-          if('album' in response.data.tracks.items[0]){
-              song = response.data.tracks.items[0].uri;
-              return resolve("here is the song :", song);
+          if(response.data.tracks.items.length > 0){
+            if('album' in response.data.tracks.items[0]){
+                console.log("we have a song!");
+                let song = response.data.tracks.items[0].uri;
+                apiData.track_data = song;
+                console.log("here is API data", apiData);
+                jsonFile.writeFile(file, apiData);
+                return resolve();
+            }
           } else {
-            reject(Error("There is no song"));
+            //set to default at end of all calls
+            console.log("There is no song");
           }
         })
         .catch(error => {
@@ -95,10 +101,9 @@ function callSpotifyApi(processedData) {
       })
     }
 
-    let foundSong = false;
     // do some error handling if song is not found.
+    // right now this is returning the stuff from Google.
     processedData.find(getSong);
-
   })
 }
 
