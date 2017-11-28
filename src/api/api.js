@@ -17,7 +17,7 @@ let apiData = {};
 
 function callAPI() {
   axios.get(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
-  .then((response) => {
+  .then(response => {
     let data = response.data;
     apiData.image_data =
       {
@@ -28,11 +28,13 @@ function callAPI() {
         'hdurl': data.hdurl,
         'url': data.url
       };
-
-    callNLPLibrary(data.title, data.explanation);
+      return(data.title, data.explanation);
   })
-  .catch(function(error) {
-    console.log('request to NASA failed', error)
+  .then((title, explanation) => {
+    callNLPLibrary(title, explanation);
+  })
+  .catch(error => {
+    console.log('request to NASA failed', error);
   })
 }
 
@@ -45,10 +47,12 @@ function callNLPLibrary(title, explanation) {
   };
 
   client
-    .analyzeEntities({document: document})
+    .analyzeEntities({document})
     .then(results => {
-      const processedData = results[0].entities;
-      callSpotifyApi(processedData);
+      return results[0].entities;
+    })
+    .then(entity => {
+      callSpotifyApi(entity);
     })
     .catch(err => {
       console.error('Error from Google: ', err);
@@ -56,8 +60,8 @@ function callNLPLibrary(title, explanation) {
 }
 
 function callSpotifyApi(processedData) {
-  let payload = SPOTIFY_ID + ":" + SPOTIFY_SECRET;
-  let encodedPayload = new Buffer(payload).toString("base64");
+  let payload = `${SPOTIFY_ID}:${SPOTIFY_SECRET}`;
+  let encodedPayload = new Buffer(payload).toString('base64');
 
   axios({
     url: 'https://accounts.spotify.com/api/token',
@@ -67,13 +71,13 @@ function callSpotifyApi(processedData) {
     },
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + encodedPayload
+      'Authorization': `Basic ${encodedPayload}`
     },
   })
   .then(response => {
     let token = response.data.access_token;
-
     let getSong = function(entity){
+      console.log("here is entity", entity);
       return new Promise(function(resolve, reject) {
         let songSearchTerm = entity.name;
         let song = '';
@@ -86,20 +90,17 @@ function callSpotifyApi(processedData) {
                 console.log("we have a song!");
                 let song = response.data.tracks.items[0].uri;
                 apiData.track_data = song;
-                //jsonFile.writeFile(file, apiData);
+                jsonFile.writeFile(file, apiData);
                 return resolve();
             }
           }
         })
         .catch(error => {
-          console.log("error with spotify", error)
+          console.log("Error with Spotify", error);
         })
       })
     }
-
-    // do some error handling if song is not found.
-    // right now this is returning the stuff from Google.
-    console.log("here is returned value from processedData", processedData.find(getSong));
+    processedData.find(getSong);
   })
 }
 
