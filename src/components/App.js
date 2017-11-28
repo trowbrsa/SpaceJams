@@ -4,6 +4,7 @@ import Image from './Image';
 import Track from './Track';
 import InformationModal from './InformationModal'
 import data from '../../dailyData.json';
+import icon from '../../public/ic_info_black_24dp_2x.png';
 
 class App extends Component {
   constructor(){
@@ -28,9 +29,8 @@ class App extends Component {
 
     const informationModalStyle = {
       position: 'fixed',
-      bottom: '8px',
+      bottom: '1px',
       right: 0,
-      marginBottom: 5,  
     }
 
     return(
@@ -38,7 +38,7 @@ class App extends Component {
         <Image image={this.state.image}/>
         <span className='informationModal' style={informationModalStyle}
           onClick={this.toggleModal}>
-          <img src={require('../../public/ic_info_black_24dp_2x.png')} />
+          <img src={icon} alt="more info" />
         </span>
         <Track track={this.state.track}/>
        <InformationModal

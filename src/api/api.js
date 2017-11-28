@@ -18,6 +18,9 @@ function callAPI() {
   axios.get(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
   .then(response => {
     let data = response.data;
+    if(response.data.media_type !== 'image'){
+      return;
+    }
     apiData.image_data =
       {
         'date': data.date,
@@ -33,8 +36,11 @@ function callAPI() {
   .then((title, explanation) => {
     callNLPLibrary(title, explanation);
   })
+  .then(entity => {
+    callSpotifyApi(entity);
+  })
   .catch(error => {
-    console.log('request to NASA failed', error);
+    console.log('request failed', error);
   })
 }
 
@@ -50,9 +56,6 @@ function callNLPLibrary(title, explanation) {
     .analyzeEntities({document})
     .then(results => {
       return results[0].entities;
-    })
-    .then(entity => {
-      callSpotifyApi(entity);
     })
     .catch(err => {
       console.error('Error from Google: ', err);
@@ -92,8 +95,9 @@ function callSpotifyApi(processedData) {
                 return resolve();
             }
           }
-
-          return reject();
+          // no song found, use default
+          song = '3gdewACMIVMEWVbyb8O9sY';
+          return reject(song);
         })
         .catch(error => {
           console.log("Error with Spotify", error);
