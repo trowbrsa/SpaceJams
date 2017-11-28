@@ -1,5 +1,4 @@
 import axios from 'axios';
-import async from 'async';
 import dotenv from 'dotenv';
 import jsonFile from 'jsonfile';
 
@@ -78,7 +77,7 @@ function callSpotifyApi(processedData) {
     let token = response.data.access_token;
     let getSong = function(entity){
       console.log("here is entity", entity);
-      return new Promise(function(resolve, reject) {
+      return new Promise(function(resolve) {
         let songSearchTerm = entity.name;
         let song = '';
         axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
@@ -88,7 +87,7 @@ function callSpotifyApi(processedData) {
           if(response.data.tracks.items.length > 0){
             if('album' in response.data.tracks.items[0]){
                 console.log("we have a song!");
-                let song = response.data.tracks.items[0].uri;
+                song = response.data.tracks.items[0].uri;
                 apiData.track_data = song;
                 jsonFile.writeFile(file, apiData);
                 return resolve();

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Image from './components/Image';
 import Track from './components/Track';
-import InformationIcon from './components/InformationIcon';
 import InformationModal from './components/InformationModal'
 import data from '../dailyData.json';
 
@@ -17,7 +16,7 @@ class App extends Component {
     }
   }
 
-  toggleModal = () => {
+  toggleModal() {
     this.setState({
       isModalOpen: !this.state.isModalOpen
     });
