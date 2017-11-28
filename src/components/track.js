@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../styles.css';
 
 class Track extends Component {
   constructor(props){
@@ -8,7 +7,7 @@ class Track extends Component {
   }
 
   render(){
-    
+
     const trackContainerStyle = {
       position: 'fixed',
       bottom: 0,

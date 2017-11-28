@@ -25,7 +25,8 @@ function callAPI() {
         'title': data.title,
         'explanation': data.explanation,
         'hdurl': data.hdurl,
-        'url': data.url
+        'url': data.url,
+        'media_type': data.media_type
       };
       return(data.title, data.explanation);
   })
@@ -76,8 +77,7 @@ function callSpotifyApi(processedData) {
   .then(response => {
     let token = response.data.access_token;
     let getSong = function(entity){
-      console.log("here is entity", entity);
-      return new Promise(function(resolve) {
+      return new Promise(function(resolve, reject) {
         let songSearchTerm = entity.name;
         let song = '';
         axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
@@ -86,20 +86,21 @@ function callSpotifyApi(processedData) {
         .then(response => {
           if(response.data.tracks.items.length > 0){
             if('album' in response.data.tracks.items[0]){
-                console.log("we have a song!");
                 song = response.data.tracks.items[0].uri;
                 apiData.track_data = song;
                 jsonFile.writeFile(file, apiData);
                 return resolve();
             }
           }
+
+          return reject();
         })
         .catch(error => {
           console.log("Error with Spotify", error);
         })
       })
+      processedData.find(getSong);
     }
-    processedData.find(getSong);
   })
 }
 

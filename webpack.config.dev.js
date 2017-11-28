@@ -28,7 +28,10 @@ export default {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader'],
         include: __dirname + '/src'
-      }
+      },
+      { test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192'
+      },
     ]
   },
   node: {
