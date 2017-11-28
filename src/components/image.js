@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../styles.css';
 
 class Image extends Component {
   constructor(props){
@@ -8,8 +7,19 @@ class Image extends Component {
   }
 
   render(){
+
+    const imageContainerStyle = {
+      minHeight: '100%',
+      minWidth: '1024px',
+      width: '100%',
+      height: 'auto',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+    };
+
     return (
-      <img className="imageContainer" src={this.props.image}/>
+      <img className="imageContainer" style={imageContainerStyle} src={this.props.image}/>
     )
   }
 }
