@@ -18,7 +18,7 @@ function callAPI() {
   axios.get(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
   .then(response => {
     let data = response.data;
-    if(response.data.media_type !== 'image'){
+    if(data.media_type !== 'image'){
       return;
     }
     apiData.image_data =
@@ -55,7 +55,16 @@ function callNLPLibrary(title, explanation) {
   client
     .analyzeEntities({document})
     .then(results => {
-      return results[0].entities;
+      const entities = results[0].entities;
+      const numberOfEntityExamples = entities.length > 5 ? 5 : entities.length;
+      for(let i = 0; i < numberOfEntityExamples; i++){
+        apiData[i].nlp_data = {
+          'name': entities.name,
+          'salience': entities.salience
+        }
+        jsonFile.writeFile(file, apiData);
+      }
+      return entities;
     })
     .catch(err => {
       console.error('Error from Google: ', err);
@@ -80,7 +89,7 @@ function callSpotifyApi(processedData) {
   .then(response => {
     let token = response.data.access_token;
     let getSong = function(entity){
-      return new Promise(function(resolve, reject) {
+      return new Promise(function(resolve) {
         let songSearchTerm = entity.name;
         let song = '';
         axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
@@ -90,13 +99,18 @@ function callSpotifyApi(processedData) {
           if(response.data.tracks.items.length > 0){
             if('album' in response.data.tracks.items[0]){
                 song = response.data.tracks.items[0].uri;
+                // this is not getting populated. 
                 apiData.track_data = song;
+                console.log("we have a song!");
                 jsonFile.writeFile(file, apiData);
                 return resolve();
             }
           }
           // no song found, use default
           song = '3gdewACMIVMEWVbyb8O9sY';
+          apiData.track_data = song;
+          console.log("use default song!");
+          jsonFile.writeFile(file, apiData);
           return reject(song);
         })
         .catch(error => {
