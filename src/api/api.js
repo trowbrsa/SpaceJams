@@ -19,7 +19,8 @@ function callAPI() {
   .then(response => {
     let data = response.data;
     if(data.media_type !== 'image'){
-      return;
+      console.log("no son available today :(")
+      //return;
     }
     apiData.image_data =
       {
@@ -35,9 +36,6 @@ function callAPI() {
   })
   .then((title, explanation) => {
     callNLPLibrary(title, explanation);
-  })
-  .then(entity => {
-    callSpotifyApi(entity);
   })
   .catch(error => {
     console.log('request failed', error);
@@ -56,15 +54,21 @@ function callNLPLibrary(title, explanation) {
     .analyzeEntities({document})
     .then(results => {
       const entities = results[0].entities;
+      console.log("here are entities", entities);
       const numberOfEntityExamples = entities.length > 5 ? 5 : entities.length;
       for(let i = 0; i < numberOfEntityExamples; i++){
-        apiData[i].nlp_data = {
-          'name': entities.name,
-          'salience': entities.salience
+        let nlp_data = 'nlp_data' + i;
+        apiData[nlp_data] = {
+          'name': entities[i].name,
+          'salience': entities[i].salience
         }
+        console.log(apiData);
         jsonFile.writeFile(file, apiData);
       }
       return entities;
+    })
+    .then(entity => {
+      callSpotifyApi(entity);
     })
     .catch(err => {
       console.error('Error from Google: ', err);
@@ -99,7 +103,6 @@ function callSpotifyApi(processedData) {
           if(response.data.tracks.items.length > 0){
             if('album' in response.data.tracks.items[0]){
                 song = response.data.tracks.items[0].uri;
-                // this is not getting populated. 
                 apiData.track_data = song;
                 console.log("we have a song!");
                 jsonFile.writeFile(file, apiData);
@@ -117,8 +120,8 @@ function callSpotifyApi(processedData) {
           console.log("Error with Spotify", error);
         })
       })
-      processedData.find(getSong);
     }
+    processedData.find(getSong);
   })
 }
 
