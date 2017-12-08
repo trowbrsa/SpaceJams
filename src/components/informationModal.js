@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import closeIcon from '../../public/ic_close_white_24dp_2x.png';
 
 class InformationModal extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.handleClick = this.handleClick.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -73,15 +73,20 @@ class InformationModal extends React.Component {
           className="modal"
           style={modalStyle}
           ref={ node => {this.node = node; }}
-          // this event needs to be on the icon itself 
           onClick={this.handleClick}
         >
-          {this.props.children}
-            {this.state.popupVisible && (
               <div className="popover">
-                I'm a popover!
+                <div>
+                  {this.props.imageTitle}
+                </div>
+                <div>
+                  {this.props.imageExplanation}
+                </div>
+                <div>
+                  {this.props.nlpData0Name}
+                </div>
+                {this.props.nlpData0Salience}
               </div>
-            )}
         </div>
     );
   }
