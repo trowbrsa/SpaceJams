@@ -59,6 +59,10 @@ class InformationModal extends React.Component {
       margin: '0 auto',
       padding: 30,
       position: 'relative',
+      color: 'white',
+      lineHeight: 1.5,
+      fontFamily: 'Arial',
+      letterSpacing: 1.7,
     };
 
     const closeModal = {
@@ -68,6 +72,11 @@ class InformationModal extends React.Component {
       filter: 'invert(50%)',
     };
 
+    const popoverHeader = {
+      fontSize: 25,
+      paddingBottom: 0.6 + 'em',
+    }
+
     return (
         <div
           className="modal"
@@ -76,7 +85,7 @@ class InformationModal extends React.Component {
           onClick={this.handleClick}
         >
               <div className="popover">
-                <div>
+                <div className="popoverHeader" style={popoverHeader}>
                   {this.props.imageTitle}
                 </div>
                 <div>

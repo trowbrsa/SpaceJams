@@ -16,7 +16,7 @@ class Track extends Component {
 
     return (
       <div className="trackContainer" style={trackContainerStyle}>
-        <iframe src={`https://embed.spotify.com/?uri=${this.props.track}`} width='75' height='75' frameBorder='0'></iframe>
+        <iframe src={`https://embed.spotify.com/?uri=${this.props.track}`} width='250' height='75' frameBorder='0'></iframe>
       </div>
     )
   }
