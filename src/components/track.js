@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import style from './track.css';
 
 class Track extends Component {
   constructor(props){
     super(props);
   }
 
+
+
   render(){
 
-    const trackContainerStyle = {
-      position: 'fixed',
-      bottom: 0,
-      left: 0,
-    };
-
     return (
-      <div className="trackContainer" style={trackContainerStyle}>
-        <iframe src={`https://embed.spotify.com/?uri=${this.props.track}`} width='250' height='75' frameBorder='0'></iframe>
+      <div className="trackContainer">
+        <iframe src={`https://embed.spotify.com/?uri=${this.props.track}`} width='200' height='75' transition='width 2s' frameBorder='0'></iframe>
       </div>
     )
   }
