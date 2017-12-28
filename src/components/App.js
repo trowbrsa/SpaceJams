@@ -15,6 +15,14 @@ class App extends Component {
       trackUri: data.track_data.uri,
       trackName: data.track_data.name,
       isModalOpen: false,
+      nlpResult0Name: data.nlp_data0.name,
+      nlpResult0Salience: data.nlp_data0.salience,
+      nlpResult1Name: data.nlp_data1.name,
+      nlpResult1Salience: data.nlp_data1.salience,
+      nlpResult2Name: data.nlp_data2.name,
+      nlpResult2Salience: data.nlp_data2.salience,
+      nlpResult3Name: data.nlp_data3.name,
+      nlpresult3Salience: data.nlp_data3.salience
     }
 
     this.toggleModal = this.toggleModal.bind(this);
@@ -46,7 +54,17 @@ class App extends Component {
           trackName={this.state.trackName}
         />
        <InformationModal
+        imageTitle={this.state.imageTitle}
+        imageExplanation={this.state.imageExplanation}
         show={this.state.isModalOpen}
+        nlpData0Name={this.state.nlpResult0Name}
+        nlpData0Salience={this.state.nlpResult0Salience}
+        nlpData1Name={this.state.nlpData1}
+        nlpData1Salience={this.state.nlpResult1Salience}
+        nlpData2Name={this.state.nlpData2}
+        nlpData2Salience={this.state.nlpResult2Salience}
+        nlpData3Name={this.state.nlpData3}
+        nlpData3Salience={this.state.nlpResult3Salience}
         onClose={this.toggleModal} />
       </div>
     );

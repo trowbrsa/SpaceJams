@@ -19,8 +19,8 @@ function callAPI() {
   .then(response => {
     let data = response.data;
     if(data.media_type !== 'image'){
-      console.log("no son available today :(")
-      //return;
+      console.log("no song available today :(")
+      return;
     }
     apiData.image_data =
       {

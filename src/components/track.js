@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import style from './track.css';
 
 class Track extends Component {
   constructor(props){
     super(props);
   }
 
-  render(){
 
-    const trackContainerStyle = {
-      position: 'fixed',
-      bottom: 0,
-      left: 0,
-    };
+
+  render(){
 
     return (
       <div className="trackContainer" style={trackContainerStyle}>
