@@ -50,7 +50,8 @@ class App extends Component {
       <div>
         <Image image={this.state.image}/>
         <span className='informationModal' style={informationModalStyle}
-          onClick={this.toggleModal}>
+          onClick={this.toggleModal}
+          >
           <img src={icon} alt="more info" />
         </span>
         <Track

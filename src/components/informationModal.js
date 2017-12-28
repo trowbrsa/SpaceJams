@@ -2,45 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './informationModal.css';
 import closeIcon from '../../public/ic_close_white_24dp_2x.png';
+import onClickOutside from "react-onclickoutside";
 
 class InformationModal extends React.Component {
   constructor(props){
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
-
-    this.state = {
-      popupVisible: false
-    };
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  handleClick() {
-    // handle click 
-    // popup is visible, so we want to add event listener
-    // so that if we click outside, it will close the popup
-    if (!this.state.popupVisible) {
-      console.log("popup visible");
-      // attach/remove event handler
-      document.addEventListener('click', this.handleOutsideClick, false);
-    } else {
-      // popup is not visible, so remove listener
-      console.log("popup not visible");
-      document.removeEventListener('click', this.handleOutsideClick, false);
-    }
-
-    this.setState(prevState => ({
-       popupVisible: !prevState.popupVisible,
-    }));
+  toggleModal = (evt) => {
+    evt.preventDefault();
+    // set state of parent component
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    });
   }
 
-  handleOutsideClick(e) {
-    // ignore clicks on the component itself
-    if (this.node.contains(e.target)) {
-      return;
-    }
-    this.handleClick();
-  }
+  handleClickOutside = evt => {
+    console.log("handle it!");
+    this.toggleModal(evt);
+  };
 
   render() {
     if(!this.props.show) {
@@ -86,9 +68,7 @@ class InformationModal extends React.Component {
     return (
         <div
           className="modal"
-          style={modalStyle}
-          ref={ node => {this.node = node; }}
-          onClick={this.handleClick}>
+          style={modalStyle}>
           <div className="popover">
             <div className="popoverHeader" style={popoverHeader}>
               {this.props.imageTitle}
@@ -108,11 +88,9 @@ class InformationModal extends React.Component {
 }
 
 InformationModal.propTypes = {
-  onClose: PropTypes.func.isRequired,
   show: PropTypes.bool,
   children: PropTypes.node
 };
 
 
-
-export default InformationModal;
+export default onClickOutside(InformationModal);

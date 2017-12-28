@@ -12,7 +12,8 @@
     "jsonfile": "^4.0.0",
     "path": "^0.12.7",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1"
+    "react-dom": "^16.1.1",
+    "react-onclickoutside": "^6.7.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
