@@ -12,7 +12,8 @@ class App extends Component {
 
     this.state = {
       image: data.image_data.hdurl,
-      track: data.track_data,
+      trackUri: data.track_data.uri,
+      trackName: data.track_data.name,
       isModalOpen: false,
     }
 
@@ -40,7 +41,10 @@ class App extends Component {
           onClick={this.toggleModal}>
           <img src={icon} alt="more info" />
         </span>
-        <Track track={this.state.track}/>
+        <Track
+          trackUri={this.state.trackUri}
+          trackName={this.state.trackName}
+        />
        <InformationModal
         show={this.state.isModalOpen}
         onClose={this.toggleModal} />

@@ -102,16 +102,26 @@ function callSpotifyApi(processedData) {
         .then(response => {
           if(response.data.tracks.items.length > 0){
             if('album' in response.data.tracks.items[0]){
-                song = response.data.tracks.items[0].uri;
-                apiData.track_data = song;
-                console.log("we have a song!");
+                let name = ("track info", response.data.tracks.items[0].name);
+                let uri = response.data.tracks.items[0].uri;
+                apiData.track_data =
+                  {
+                    'name': name,
+                    'uri': uri
+                  }
+
                 jsonFile.writeFile(file, apiData);
                 return resolve();
             }
           }
           // no song found, use default
+          // this isn't working
           song = '3gdewACMIVMEWVbyb8O9sY';
-          apiData.track_data = song;
+          apiData.track_data =
+            {
+              'name': 'Test',
+              'uri': song
+            }
           console.log("use default song!");
           jsonFile.writeFile(file, apiData);
           return reject(song);

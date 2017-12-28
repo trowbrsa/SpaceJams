@@ -1,0 +1,12 @@
+.trackContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  width: 75px;
+  transition: .5s ease;
+};
+
+/*.trackContainer:hover {
+    width: 200px;
+}*/

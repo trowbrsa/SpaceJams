@@ -36,6 +36,9 @@ class InformationModal extends React.Component {
             </button>
           </div>
         </div>
+        <div className="trackInfo">
+          
+        </div>
       </div>
     );
   }
