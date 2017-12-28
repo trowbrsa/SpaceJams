@@ -84,22 +84,21 @@ class InformationModal extends React.Component {
           ref={ node => {this.node = node; }}
           onClick={this.handleClick}
         >
-              <div className="popover">
-                <div className="popoverHeader" style={popoverHeader}>
-                  {this.props.imageTitle}
-                </div>
-                <div>
-                  {this.props.imageExplanation}
-                </div>
-                <div>
-                  {this.props.nlpData0Name}
-                </div>
-                {this.props.nlpData0Salience}
-              </div>
+          <div className="popover">
+            <div className="popoverHeader" style={popoverHeader}>
+              {this.props.imageTitle}
+            </div>
+            <div>
+              {this.props.imageExplanation}
+            </div>
+            <div className="trackInfo">
+              Track Name: {this.props.trackName}
+              Artist: {this.props.trackArtist}
+              Album: {this.props.trackAlbum}
+            </div>
+
+          </div>
         </div>
-        <div className="trackInfo">
-        </div>
-      </div>
     );
   }
 }

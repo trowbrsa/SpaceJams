@@ -54,7 +54,6 @@ function callNLPLibrary(title, explanation) {
     .analyzeEntities({document})
     .then(results => {
       const entities = results[0].entities;
-      console.log("here are entities", entities);
       const numberOfEntityExamples = entities.length > 5 ? 5 : entities.length;
       for(let i = 0; i < numberOfEntityExamples; i++){
         let nlp_data = 'nlp_data' + i;
@@ -62,7 +61,6 @@ function callNLPLibrary(title, explanation) {
           'name': entities[i].name,
           'salience': entities[i].salience
         }
-        console.log(apiData);
         jsonFile.writeFile(file, apiData);
       }
       return entities;
@@ -102,16 +100,21 @@ function callSpotifyApi(processedData) {
         .then(response => {
           if(response.data.tracks.items.length > 0){
             if('album' in response.data.tracks.items[0]){
-                let name = ("track info", response.data.tracks.items[0].name);
-                let uri = response.data.tracks.items[0].uri;
-                apiData.track_data =
-                  {
-                    'name': name,
-                    'uri': uri
-                  }
+              let trackInfo = response.data.tracks.items[0];
+              console.log("info from spotify: ", trackInfo);
+              let name = trackInfo.name;
+              let album = trackInfo.album.name;
+              let artist = trackInfo.artists[0].name;
+              let uri = trackInfo.uri;
+              apiData.track_data =
+                {
+                  'name': name,
+                  'album': album,
+                  'song': uri
+                }
 
-                jsonFile.writeFile(file, apiData);
-                return resolve();
+              jsonFile.writeFile(file, apiData);
+              return resolve();
             }
           }
           // no song found, use default
@@ -120,7 +123,7 @@ function callSpotifyApi(processedData) {
           apiData.track_data =
             {
               'name': 'Test',
-              'uri': song
+              'song': song
             }
           console.log("use default song!");
           jsonFile.writeFile(file, apiData);

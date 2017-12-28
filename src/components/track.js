@@ -12,7 +12,7 @@ class Track extends Component {
   render(){
 
     return (
-      <div className="trackContainer" style={trackContainerStyle}>
+      <div className="trackContainer" style={style.trackContainerStyle}>
         <iframe src={`https://embed.spotify.com/?uri=${this.props.trackUri}`} width='75' height='75' frameBorder='0'></iframe>
       </div>
     )

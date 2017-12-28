@@ -12,8 +12,12 @@ class App extends Component {
 
     this.state = {
       image: data.image_data.hdurl,
+      imageTitle: data.image_data.title,
+      explanation: data.image_data.explanation,
       trackUri: data.track_data.uri,
       trackName: data.track_data.name,
+      trackAlbum: data.track_data.album,
+      trackArtist: data.track_data.artist,
       isModalOpen: false,
       nlpResult0Name: data.nlp_data0.name,
       nlpResult0Salience: data.nlp_data0.salience,
@@ -51,11 +55,13 @@ class App extends Component {
         </span>
         <Track
           trackUri={this.state.trackUri}
-          trackName={this.state.trackName}
         />
        <InformationModal
         imageTitle={this.state.imageTitle}
-        imageExplanation={this.state.imageExplanation}
+        imageExplanation={this.state.explanation}
+        trackName={this.state.trackName}
+        trackArtist={this.state.trackArtist}
+        trackAlbum={this.state.trackAlbum}
         show={this.state.isModalOpen}
         nlpData0Name={this.state.nlpResult0Name}
         nlpData0Salience={this.state.nlpResult0Salience}
