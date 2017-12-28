@@ -101,16 +101,17 @@ function callSpotifyApi(processedData) {
           if(response.data.tracks.items.length > 0){
             if('album' in response.data.tracks.items[0]){
               let trackInfo = response.data.tracks.items[0];
-              console.log("info from spotify: ", trackInfo);
+              // console.log("info from spotify: ", trackInfo);
               let name = trackInfo.name;
               let album = trackInfo.album.name;
               let artist = trackInfo.artists[0].name;
               let uri = trackInfo.uri;
+              console.log("here is spotify uri", uri);
               apiData.track_data =
                 {
                   'name': name,
                   'album': album,
-                  'song': uri
+                  'uri': uri
                 }
 
               jsonFile.writeFile(file, apiData);

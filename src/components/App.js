@@ -57,21 +57,22 @@ class App extends Component {
           trackUri={this.state.trackUri}
         />
        <InformationModal
-        imageTitle={this.state.imageTitle}
-        imageExplanation={this.state.explanation}
-        trackName={this.state.trackName}
-        trackArtist={this.state.trackArtist}
-        trackAlbum={this.state.trackAlbum}
-        show={this.state.isModalOpen}
-        nlpData0Name={this.state.nlpResult0Name}
-        nlpData0Salience={this.state.nlpResult0Salience}
-        nlpData1Name={this.state.nlpData1}
-        nlpData1Salience={this.state.nlpResult1Salience}
-        nlpData2Name={this.state.nlpData2}
-        nlpData2Salience={this.state.nlpResult2Salience}
-        nlpData3Name={this.state.nlpData3}
-        nlpData3Salience={this.state.nlpResult3Salience}
-        onClose={this.toggleModal} />
+          imageTitle={this.state.imageTitle}
+          imageExplanation={this.state.explanation}
+          trackName={this.state.trackName}
+          trackArtist={this.state.trackArtist}
+          trackAlbum={this.state.trackAlbum}
+          show={this.state.isModalOpen}
+          nlpData0Name={this.state.nlpResult0Name}
+          nlpData0Salience={this.state.nlpResult0Salience}
+          nlpData1Name={this.state.nlpData1}
+          nlpData1Salience={this.state.nlpResult1Salience}
+          nlpData2Name={this.state.nlpData2}
+          nlpData2Salience={this.state.nlpResult2Salience}
+          nlpData3Name={this.state.nlpData3}
+          nlpData3Salience={this.state.nlpResult3Salience}
+          onClose={this.toggleModal}
+        />
       </div>
     );
   }

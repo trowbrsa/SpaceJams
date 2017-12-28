@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import style from './informationModal.css';
 import closeIcon from '../../public/ic_close_white_24dp_2x.png';
 
 class InformationModal extends React.Component {
@@ -15,10 +16,16 @@ class InformationModal extends React.Component {
   }
 
   handleClick() {
+    // handle click 
+    // popup is visible, so we want to add event listener
+    // so that if we click outside, it will close the popup
     if (!this.state.popupVisible) {
+      console.log("popup visible");
       // attach/remove event handler
       document.addEventListener('click', this.handleOutsideClick, false);
     } else {
+      // popup is not visible, so remove listener
+      console.log("popup not visible");
       document.removeEventListener('click', this.handleOutsideClick, false);
     }
 
@@ -32,7 +39,6 @@ class InformationModal extends React.Component {
     if (this.node.contains(e.target)) {
       return;
     }
-
     this.handleClick();
   }
 
@@ -82,8 +88,7 @@ class InformationModal extends React.Component {
           className="modal"
           style={modalStyle}
           ref={ node => {this.node = node; }}
-          onClick={this.handleClick}
-        >
+          onClick={this.handleClick}>
           <div className="popover">
             <div className="popoverHeader" style={popoverHeader}>
               {this.props.imageTitle}
@@ -96,7 +101,6 @@ class InformationModal extends React.Component {
               Artist: {this.props.trackArtist}
               Album: {this.props.trackAlbum}
             </div>
-
           </div>
         </div>
     );

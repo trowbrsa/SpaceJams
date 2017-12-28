@@ -33,3 +33,7 @@
   font: 25px;
   padding-bottom: 0.6em;
 };
+
+.trackInfo {
+  display: block;
+}
