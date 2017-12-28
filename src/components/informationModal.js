@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './informationModal.css';
 import closeIcon from '../../public/ic_close_white_24dp_2x.png';
+import icon from '../../public/ic_info_black_24dp_2x.png';
+// import onClickOutside from "react-onclickoutside";
 
 class InformationModal extends React.Component {
   constructor(props){
@@ -9,33 +11,23 @@ class InformationModal extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
-
     this.state = {
-      popupVisible: false
+      modalVisible: false
     };
   }
 
   handleClick() {
-    // handle click 
-    // popup is visible, so we want to add event listener
-    // so that if we click outside, it will close the popup
-    if (!this.state.popupVisible) {
-      console.log("popup visible");
-      // attach/remove event handler
+    if(!this.state.modalVisible){
       document.addEventListener('click', this.handleOutsideClick, false);
     } else {
-      // popup is not visible, so remove listener
-      console.log("popup not visible");
       document.removeEventListener('click', this.handleOutsideClick, false);
     }
-
     this.setState(prevState => ({
-       popupVisible: !prevState.popupVisible,
+      modalVisible: !prevState.modalVisible,
     }));
   }
 
-  handleOutsideClick(e) {
-    // ignore clicks on the component itself
+  handleOutsideClick(e){
     if (this.node.contains(e.target)) {
       return;
     }
@@ -43,8 +35,11 @@ class InformationModal extends React.Component {
   }
 
   render() {
-    if(!this.props.show) {
-      return null;
+
+    const informationModalStyle = {
+      position: 'fixed',
+      bottom: '1px',
+      right: 0,
     }
 
     const backdropStyle = {
@@ -84,35 +79,46 @@ class InformationModal extends React.Component {
     }
 
     return (
-        <div
-          className="modal"
-          style={modalStyle}
-          ref={ node => {this.node = node; }}
-          onClick={this.handleClick}>
-          <div className="popover">
-            <div className="popoverHeader" style={popoverHeader}>
-              {this.props.imageTitle}
+      <div
+        className="modal-wrapper"
+        ref={node => {this.node = node;}}
+      >
+        <div>
+          <span className='informationModal' style={informationModalStyle}
+            onClick={this.handleClick}>
+            <img src={icon} alt="more info" />
+          </span>
+          {this.state.modalVisible && (
+            <div
+              className="modal"
+              style={modalStyle}
+              >
+              <div className="popover">
+                <div className="popoverHeader" style={popoverHeader}>
+                  {this.props.imageTitle}
+                </div>
+                <div>
+                  {this.props.imageExplanation}
+                </div>
+                <div className="trackInfo">
+                  Track Name: {this.props.trackName}
+                  Artist: {this.props.trackArtist}
+                  Album: {this.props.trackAlbum}
+                </div>
+              </div>
             </div>
-            <div>
-              {this.props.imageExplanation}
-            </div>
-            <div className="trackInfo">
-              Track Name: {this.props.trackName}
-              Artist: {this.props.trackArtist}
-              Album: {this.props.trackAlbum}
-            </div>
-          </div>
-        </div>
+          )}
+      </div>
+    </div>
     );
   }
 }
 
-InformationModal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  show: PropTypes.bool,
-  children: PropTypes.node
-};
-
+// InformationModal.propTypes = {
+//   onClose: PropTypes.func.isRequired,
+//   show: PropTypes.bool,
+//   children: PropTypes.node
+// };
 
 
 export default InformationModal;

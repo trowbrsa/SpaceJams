@@ -4,7 +4,6 @@ import Image from './Image';
 import Track from './Track';
 import InformationModal from './InformationModal'
 import data from '../../dailyData.json';
-import icon from '../../public/ic_info_black_24dp_2x.png';
 
 class App extends Component {
   constructor(){
@@ -28,31 +27,13 @@ class App extends Component {
       nlpResult3Name: data.nlp_data3.name,
       nlpresult3Salience: data.nlp_data3.salience
     }
-
-    this.toggleModal = this.toggleModal.bind(this);
-  }
-
-  toggleModal(){
-    this.setState({
-      isModalOpen: !this.state.isModalOpen
-    });
   }
 
   render(){
 
-    const informationModalStyle = {
-      position: 'fixed',
-      bottom: '1px',
-      right: 0,
-    }
-
     return(
       <div>
         <Image image={this.state.image}/>
-        <span className='informationModal' style={informationModalStyle}
-          onClick={this.toggleModal}>
-          <img src={icon} alt="more info" />
-        </span>
         <Track
           trackUri={this.state.trackUri}
         />
@@ -71,7 +52,6 @@ class App extends Component {
           nlpData2Salience={this.state.nlpResult2Salience}
           nlpData3Name={this.state.nlpData3}
           nlpData3Salience={this.state.nlpResult3Salience}
-          onClose={this.toggleModal}
         />
       </div>
     );
