@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import style from './informationModal.css';
 import closeIcon from '../../public/ic_close_white_24dp_2x.png';
 import icon from '../../public/ic_info_black_24dp_2x.png';
-// import onClickOutside from "react-onclickoutside";
 
 class InformationModal extends React.Component {
   constructor(props){
@@ -11,6 +10,7 @@ class InformationModal extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
+
     this.state = {
       modalVisible: false
     };
@@ -113,12 +113,6 @@ class InformationModal extends React.Component {
     );
   }
 }
-
-// InformationModal.propTypes = {
-//   onClose: PropTypes.func.isRequired,
-//   show: PropTypes.bool,
-//   children: PropTypes.node
-// };
 
 
 export default InformationModal;
