@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Pane from './Pane.js';
+import Tab from './Tab.js';
 import style from './informationModal.css';
 import closeIcon from '../../public/ic_close_white_24dp_2x.png';
 import icon from '../../public/ic_info_black_24dp_2x.png';
@@ -81,31 +83,22 @@ class InformationModal extends React.Component {
     return (
       <div
         className="modal-wrapper"
-        ref={node => {this.node = node;}}
-      >
+        ref={node => {this.node = node;}}>
         <div>
           <span className='informationModal' style={informationModalStyle}
             onClick={this.handleClick}>
             <img src={icon} alt="more info" />
           </span>
           {this.state.modalVisible && (
-            <div
-              className="modal"
-              style={modalStyle}
-              >
-              <div className="popover">
-                <div className="popoverHeader" style={popoverHeader}>
-                  {this.props.imageTitle}
-                </div>
-                <div>
-                  {this.props.imageExplanation}
-                </div>
-                <div className="trackInfo">
-                  Track Name: {this.props.trackName}
-                  Artist: {this.props.trackArtist}
-                  Album: {this.props.trackAlbum}
-                </div>
-              </div>
+            <div>
+              <Tab selected={0}>
+                <Pane label="Tab 1">
+                  <div>Tab 1 contents</div>
+                </Pane>
+                <Pane label="Tab 2">
+                  <div>Tab 2 contents</div>
+                </Pane>
+              </Tab>
             </div>
           )}
       </div>
