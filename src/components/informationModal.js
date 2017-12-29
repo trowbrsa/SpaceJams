@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './informationModal.css';
 import closeIcon from '../../public/ic_close_white_24dp_2x.png';
+import Tabs from './Tabs.js';
+import Tab from './Tab.js';
 import icon from '../../public/ic_info_black_24dp_2x.png';
 
 class InformationModal extends React.Component {
@@ -17,14 +19,14 @@ class InformationModal extends React.Component {
   }
 
   handleClick() {
-    if(!this.state.modalVisible){
-      document.addEventListener('click', this.handleOutsideClick, false);
-    } else {
-      document.removeEventListener('click', this.handleOutsideClick, false);
-    }
-    this.setState(prevState => ({
-      modalVisible: !prevState.modalVisible,
-    }));
+    // if(!this.state.modalVisible){
+    //   document.addEventListener('click', this.handleOutsideClick, false);
+    // } else {
+    //   document.removeEventListener('click', this.handleOutsideClick, false);
+    // }
+    // this.setState(prevState => ({
+    //   modalVisible: !prevState.modalVisible,
+    // }));
   }
 
   handleOutsideClick(e){
@@ -89,23 +91,16 @@ class InformationModal extends React.Component {
             <img src={icon} alt="more info" />
           </span>
           {this.state.modalVisible && (
-            <div
-              className="modal"
-              style={modalStyle}
-              >
-              <div className="popover">
-                <div className="popoverHeader" style={popoverHeader}>
-                  {this.props.imageTitle}
-                </div>
-                <div>
-                  {this.props.imageExplanation}
-                </div>
-                <div className="trackInfo">
-                  Track Name: {this.props.trackName}
-                  Artist: {this.props.trackArtist}
-                  Album: {this.props.trackAlbum}
-                </div>
-              </div>
+            <div>
+              <Tabs>
+                <Tab>
+                  <p>content</p>
+                </Tab>
+                <Tab>
+                  <p>More content</p>
+                </Tab>
+              </Tabs>
+
             </div>
           )}
       </div>
