@@ -57,31 +57,6 @@ class InformationModal extends React.Component {
       padding: 50,
     };
 
-    const modalStyle = {
-      backgroundColor: 'rgba(0,0,0,0.5)',
-      borderRadius: 5,
-      maxWidth: 500,
-      minHeight: 300,
-      margin: '0 auto',
-      padding: 30,
-      position: 'relative',
-      color: 'white',
-      lineHeight: 1.5,
-      fontFamily: 'Arial',
-      letterSpacing: 1.7,
-    };
-
-    const closeModal = {
-      position: 'absolute',
-      top: 5,
-      right: 5,
-      filter: 'invert(50%)',
-    };
-
-    const popoverHeader = {
-      fontSize: 25,
-      paddingBottom: 0.6 + 'em',
-    }
 
     return (
       <div
@@ -95,8 +70,9 @@ class InformationModal extends React.Component {
           </span>
           {this.state.modalVisible && (
             <div>
-              hello
+              <Tabs />
             </div>
+
           )}
       </div>
     </div>

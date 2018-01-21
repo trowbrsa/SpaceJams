@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 // adapted from https://medium.com/trisfera/a-simple-react-tabs-component-47cac2cfbb5
 
-export class Tabs extends Component {
+class Tabs extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -20,15 +20,15 @@ export class Tabs extends Component {
     }
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
-    renderChildrenWithTabsApiAsProps() {
-      return React.Children.map(this.props.children, (child, index) => {
-        return React.cloneElement(child, {
-          onClick : this.handleTabClick,
-          tabIndex: index,
-          isActive: index === this.state.activeTabIndex
-        });
-      });
-    }
+    // renderChildrenWithTabsApiAsProps() {
+    //   return React.Children.map(this.props.children, (child, index) => {
+    //     return React.cloneElement(child, {
+    //       onClick : this.handleTabClick,
+    //       tabIndex: index,
+    //       isActive: index === this.state.activeTabIndex
+    //     });
+    //   });
+    // }
 
     // Render current active tab content
     renderActiveTabContent() {
@@ -40,15 +40,59 @@ export class Tabs extends Component {
     }
 
     render() {
+
+      const modalStyle = {
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        borderRadius: 5,
+        maxWidth: 500,
+        minHeight: 300,
+        margin: '0 auto',
+        padding: 30,
+        position: 'relative',
+        color: 'white',
+        lineHeight: 1.5,
+        fontFamily: 'Arial',
+        letterSpacing: 1.7,
+      };
+
+      const popoverHeader = {
+        fontSize: 25,
+        paddingBottom: 0.6 + 'em',
+      };
+
+      const closeModal = {
+        position: 'absolute',
+        top: 5,
+        right: 5,
+        filter: 'invert(50%)',
+      };
+
       return (
         <div className="tabs">
           <ul className="tabs-nav nav navbar-nav navbar-left">
-            {this.renderChildrenWithTabsApiAsProps()}
-          </ul>
-          <div className="tabs-active-content">
-            {this.renderActiveTabContent()}
+            <div
+            className="modal"
+            style={modalStyle}
+            >
+            <div className="popover">
+              <div className="popoverHeader" style={popoverHeader}>
+                {this.props.imageTitle}
+              </div>
+              <div>
+                {this.props.imageExplanation}
+              </div>
+              <div className="trackInfo">
+                Track Name: {this.props.trackName}
+                Artist: {this.props.trackArtist}
+                Album: {this.props.trackAlbum}
+              </div>
+            </div>
           </div>
+
+          </ul>
         </div>
       );
     }
 };
+
+export default Tabs;
