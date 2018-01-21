@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {Tab} from './Tab';
 // adapted from https://medium.com/trisfera/a-simple-react-tabs-component-47cac2cfbb5
 
 class Tabs extends Component {
@@ -20,15 +21,15 @@ class Tabs extends Component {
     }
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
-    // renderChildrenWithTabsApiAsProps() {
-    //   return React.Children.map(this.props.children, (child, index) => {
-    //     return React.cloneElement(child, {
-    //       onClick : this.handleTabClick,
-    //       tabIndex: index,
-    //       isActive: index === this.state.activeTabIndex
-    //     });
-    //   });
-    // }
+    renderChildrenWithTabsApiAsProps() {
+      return React.Children.map(this.props.children, (child, index) => {
+        return React.cloneElement(child, {
+          onClick : this.handleTabClick,
+          tabIndex: index,
+          isActive: index === this.state.activeTabIndex
+        });
+      });
+    }
 
     // Render current active tab content
     renderActiveTabContent() {
@@ -55,11 +56,6 @@ class Tabs extends Component {
         letterSpacing: 1.7,
       };
 
-      const popoverHeader = {
-        fontSize: 25,
-        paddingBottom: 0.6 + 'em',
-      };
-
       const closeModal = {
         position: 'absolute',
         top: 5,
@@ -71,21 +67,11 @@ class Tabs extends Component {
         <div className="tabs">
           <ul className="tabs-nav nav navbar-nav navbar-left">
             <div
-            className="modal"
-            style={modalStyle}
+              className="modal"
+              style={modalStyle}
             >
             <div className="popover">
-              <div className="popoverHeader" style={popoverHeader}>
-                {this.props.imageTitle}
-              </div>
-              <div>
-                {this.props.imageExplanation}
-              </div>
-              <div className="trackInfo">
-                Track Name: {this.props.trackName}
-                Artist: {this.props.trackArtist}
-                Album: {this.props.trackAlbum}
-              </div>
+              <Tab />
             </div>
           </div>
 
