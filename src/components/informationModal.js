@@ -19,17 +19,20 @@ class InformationModal extends React.Component {
   }
 
   handleClick() {
-    // if(!this.state.modalVisible){
-    //   document.addEventListener('click', this.handleOutsideClick, false);
-    // } else {
-    //   document.removeEventListener('click', this.handleOutsideClick, false);
-    // }
-    // this.setState(prevState => ({
-    //   modalVisible: !prevState.modalVisible,
-    // }));
+    if(!this.state.modalVisible){
+      "modal is not visible"
+      document.addEventListener('click', this.handleOutsideClick, false);
+    } else {
+      console.log("modal is visble")
+      document.removeEventListener('click', this.handleOutsideClick, false);
+    }
+    this.setState(prevState => ({
+      modalVisible: !prevState.modalVisible,
+    }));
   }
 
   handleOutsideClick(e){
+    console.log("handling outside click")
     if (this.node.contains(e.target)) {
       return;
     }
@@ -92,15 +95,7 @@ class InformationModal extends React.Component {
           </span>
           {this.state.modalVisible && (
             <div>
-              <Tabs>
-                <Tab>
-                  <p>content</p>
-                </Tab>
-                <Tab>
-                  <p>More content</p>
-                </Tab>
-              </Tabs>
-
+              hello
             </div>
           )}
       </div>
