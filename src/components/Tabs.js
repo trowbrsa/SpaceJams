@@ -36,7 +36,7 @@ class Tabs extends Component {
     renderActiveTabContent() {
       const {children} = this.props;
       const {activeTabIndex} = this.state;
-      if(children[activeTabIndex]) {
+      if({children}[activeTabIndex]) {
         return children[activeTabIndex].props.children;
       }
     }
