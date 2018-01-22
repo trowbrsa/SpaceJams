@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {Tab} from './Tab';
+import {style} from './tabs.css';
 // adapted from https://medium.com/trisfera/a-simple-react-tabs-component-47cac2cfbb5
 
 class Tabs extends Component {
@@ -72,9 +73,9 @@ class Tabs extends Component {
             >
             <div className="popover">
               <Tab />
+              <Tab />
             </div>
           </div>
-
           </ul>
         </div>
       );
