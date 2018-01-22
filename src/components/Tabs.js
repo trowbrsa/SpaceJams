@@ -43,6 +43,13 @@ class Tabs extends Component {
 
     render() {
 
+      const closeModal = {
+        position: 'absolute',
+        top: 5,
+        right: 5,
+        filter: 'invert(50%)',
+      };
+
       const modalStyle = {
         backgroundColor: 'rgba(0,0,0,0.5)',
         borderRadius: 5,
@@ -57,28 +64,15 @@ class Tabs extends Component {
         letterSpacing: 1.7,
       };
 
-      const closeModal = {
-        position: 'absolute',
-        top: 5,
-        right: 5,
-        filter: 'invert(50%)',
-      };
-
-      const tabsStyling = {
-        margin: 0,
-        padding: 0,
-        listStyle: 'none',
-      };
-
       return (
-        <div className="tabs">
-          <ul className="modal" style={modalStyle}>
+        <div className="tabs" style={modalStyle}>
+          <ul className="tabs-nav nav navbar-nav navbar-left">
             {this.renderChildrenWithTabsApiAsProps()}
           </ul>
-        <div className="tabs-active-content">
-          {this.renderActiveTabContent()}
+          <div className="tabs-active-content">
+            {this.renderActiveTabContent()}
+          </div>
         </div>
-      </div>
       );
     }
 };

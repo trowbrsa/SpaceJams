@@ -17,20 +17,34 @@ class Tab extends Component {
 
   render(){
 
+    const modalStyle = {
+      backgroundColor: 'rgba(0,0,0,0.5)',
+      borderRadius: 5,
+      maxWidth: 500,
+      minHeight: 300,
+      margin: '0 auto',
+      padding: 30,
+      position: 'relative',
+      color: 'white',
+      lineHeight: 1.5,
+      fontFamily: 'Arial',
+      letterSpacing: 1.7,
+    };
+
     const popoverHeader = {
       fontSize: 25,
       paddingBottom: 0.6 + 'em',
     };
 
     return (
-      <div>
         <li className="tab">
-          <a className={`tab-link ${this.props.linkClassName} ${this.props.isActive ? 'active' : ''}`}
-            onClick={this.handleTabClick}>
-            <i className={`tab-icon ${this.props.iconClassName}`}/>
-          </a>
+          <div className="modal" style={modalStyle}>
+            <a className={`tab-link ${this.props.linkClassName} ${this.props.isActive ? 'active' : ''}`}
+              onClick={this.handleTabClick}>
+              <i className={`tab-icon ${this.props.iconClassName}`}/>
+            </a>
+          </div>
         </li>
-      </div>
     )
   }
 }

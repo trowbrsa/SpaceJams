@@ -73,10 +73,12 @@ class InformationModal extends React.Component {
                 <Tab
                   iconClassName={'fa fa-headphones'}
                   linkClassName={'custom-link'}>
+                  <p>Hello</p>
                 </Tab>
                 <Tab
                   iconClassName={'fa fa-headphones'}
                   linkClassName={'custom-link'}>
+                  <p>Hi</p>
                 </Tab>
               </Tabs>
             </div>
