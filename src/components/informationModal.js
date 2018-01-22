@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import style from './informationModal.css';
 import closeIcon from '../../public/ic_close_white_24dp_2x.png';
 import Tabs from './Tabs.js';
+import Tab from './Tabs.js';
 import icon from '../../public/ic_info_black_24dp_2x.png';
 
 class InformationModal extends React.Component {
@@ -44,7 +45,7 @@ class InformationModal extends React.Component {
       position: 'fixed',
       bottom: '1px',
       right: 0,
-    }
+    };
 
     const backdropStyle = {
       position: 'fixed',
@@ -60,8 +61,7 @@ class InformationModal extends React.Component {
     return (
       <div
         className="modal-wrapper"
-        ref={node => {this.node = node;}}
-      >
+        ref={node => {this.node = node;}}>
         <div>
           <span className='informationModal' style={informationModalStyle}
             onClick={this.handleClick}>
@@ -69,9 +69,17 @@ class InformationModal extends React.Component {
           </span>
           {this.state.modalVisible && (
             <div>
-              <Tabs />
+              <Tabs>
+                <Tab
+                  iconClassName={'fa fa-headphones'}
+                  linkClassName={'custom-link'}>
+                </Tab>
+                <Tab
+                  iconClassName={'fa fa-headphones'}
+                  linkClassName={'custom-link'}>
+                </Tab>
+              </Tabs>
             </div>
-
           )}
       </div>
     </div>

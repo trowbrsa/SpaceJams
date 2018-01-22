@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {Tab} from './Tab';
+import Tab from './Tab';
 import {style} from './tabs.css';
 // adapted from https://medium.com/trisfera/a-simple-react-tabs-component-47cac2cfbb5
 
@@ -9,7 +9,7 @@ class Tabs extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      activeTabIndex: this.props.defaultActiveTabIndex
+      activeTabIndex: 0
     };
     this.handleTabClick = this.handleTabClick.bind(this);
   }
@@ -17,8 +17,8 @@ class Tabs extends Component {
     // Toggle currently active tab
     handleTabClick(tabIndex) {
       this.setState({
-          activeTabIndex: tabIndex === this.state.activeTabIndex ? this.props.defaultActiveTabIndex : tabIndex
-        });
+        activeTabIndex: tabIndex === this.state.activeTabIndex ? this.props.defaultActiveTabIndex : tabIndex
+      });
     }
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
@@ -64,20 +64,21 @@ class Tabs extends Component {
         filter: 'invert(50%)',
       };
 
+      const tabsStyling = {
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
+      };
+
       return (
         <div className="tabs">
-          <ul className="tabs-nav nav navbar-nav navbar-left">
-            <div
-              className="modal"
-              style={modalStyle}
-            >
-            <div className="popover">
-              <Tab />
-              <Tab />
-            </div>
-          </div>
+          <ul className="modal" style={modalStyle}>
+            {this.renderChildrenWithTabsApiAsProps()}
           </ul>
+        <div className="tabs-active-content">
+          {this.renderActiveTabContent()}
         </div>
+      </div>
       );
     }
 };
