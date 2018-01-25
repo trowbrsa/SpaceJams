@@ -94,17 +94,27 @@ class InformationModal extends React.Component {
               style={modalStyle}
               >
               <div className="popover">
-                <div className="popoverHeader" style={popoverHeader}>
-                  {this.props.imageTitle}
-                </div>
                 <div>
-                  {this.props.imageExplanation}
-                </div>
-                <div className="trackInfo">
-                  Track Name: {this.props.trackName}
-                  Artist: {this.props.trackArtist}
-                  Album: {this.props.trackAlbum}
-                </div>
+                  <h1>Responsive CSS Tabs</h1>
+                  <main>
+                   <input id="tab1" type="radio" name="tabs" checked={false}/>
+                   <label htmlFor="tab1">Content 1</label>
+
+                   <input id="tab2" type="radio" name="tabs" checked={false}/>
+                   <label htmlFor="tab2">Cotent 2</label>
+                   <section id="content1">
+                     <p>
+                      Intriguing Info
+                     </p>
+                   </section>
+
+                   <section id="content2">
+                     <p>
+                       More intriguing info
+                     </p>
+                   </section>
+                 </main>
+               </div>
               </div>
             </div>
           )}
