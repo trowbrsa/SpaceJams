@@ -25,8 +25,8 @@ export default {
         }
       },
       {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        test:/\.(s*)css$/,
+        use:['style-loader','css-loader', 'sass-loader'],
         include: __dirname + '/src'
       },
       { test: /\.(png|jpg)$/,
