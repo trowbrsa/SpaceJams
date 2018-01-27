@@ -53,17 +53,6 @@ label {
   border: 1px solid transparent;
 }
 
-label:before {
-  font-family: fontawesome;
-  font-weight: normal;
-  margin-right: 10px;
-}
-
-label[for*='1']:before { content: '\f1cb'; }
-label[for*='2']:before { content: '\f17d'; }
-label[for*='3']:before { content: '\f16b'; }
-label[for*='4']:before { content: '\f1a9'; }
-
 label:hover {
   color: #888;
   cursor: pointer;
@@ -83,18 +72,38 @@ input:checked + label {
   display: block;
 }
 
-@media screen and (max-width: 650px) {
-  label {
-    font-size: 0;
-  }
-  label:before {
-    margin: 0;
-    font-size: 18px;
-  }
-}
+// @media screen and (max-width: 650px) {
+//   label {
+//     font-size: 0;
+//   }
+//   label:before {
+//     margin: 0;
+//     font-size: 18px;
+//   }
+// }
 
 @media screen and (max-width: 400px) {
   label {
     padding: 15px;
   }
+}
+
+.modal {
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 5;
+  max-width: 500;
+  min-height: 300;
+  margin: 0 auto;
+  padding: 30;
+  position: relative;
+  color: white;
+  line-height: 1.5px;
+  font-family: Arial;
+  letter-spacing: 1.7px;
+};
+
+.informationIcon {
+  position: fixed;
+  bottom: '2px';
+  right: 0;
 }
