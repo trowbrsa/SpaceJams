@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import style from './informationModal.css';
 import './informationalModal.scss';
 import closeIcon from '../../public/ic_close_white_18dp_2x.png';
 import icon from '../../public/ic_info_black_24dp_2x.png';

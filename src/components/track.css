@@ -7,6 +7,6 @@
   transition: .5s ease;
 };
 
-/*.trackContainer:hover {
-    width: 200px;
-}*/
+.trackContainer:hover {
+    width: 300px;
+}
