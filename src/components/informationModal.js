@@ -98,14 +98,13 @@ class InformationModal extends React.Component {
                 a natural language processing library that determines the main keyword(s) of the image.
                 Those keywords are sent individually, one by one, to Spotify, until Spotify finds an associated song.
                 </p>
-                <p>These are the top 3 keywords the natural language processing library found for this image:
+                <p>These are the top 3 keywords the natural language processing library found for this image:</p>
                   <ul>
                     <li>{this.props.nlpData0Name}</li>
                     <li>{this.props.nlpData1Name}</li>
                     <li>{this.props.nlpData2Name}</li>
                   </ul>
-                  Spotify was able to find a song with this keyword.
-                </p>
+                  <p>Spotify was able to find a song with this keyword.</p>
               </section>
               <section id="about">
                 <p>Space Jamz is a project that aims to pair images from <a href="https://apod.nasa.gov/apod/astropix.html">NASA's Astronomy Picture
