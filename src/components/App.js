@@ -48,11 +48,11 @@ class App extends Component {
           show={this.state.isModalOpen}
           nlpData0Name={this.state.nlpResult0Name}
           nlpData0Salience={this.state.nlpResult0Salience}
-          nlpData1Name={this.state.nlpData1}
+          nlpData1Name={this.state.nlpResult1Name}
           nlpData1Salience={this.state.nlpResult1Salience}
-          nlpData2Name={this.state.nlpData2}
+          nlpData2Name={this.state.nlpResult2Name}
           nlpData2Salience={this.state.nlpResult2Salience}
-          nlpData3Name={this.state.nlpData3}
+          nlpData3Name={this.state.nlpResult2Name}
           nlpData3Salience={this.state.nlpResult3Salience}
         />
       </div>

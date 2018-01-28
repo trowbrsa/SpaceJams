@@ -109,12 +109,12 @@ input:checked + label {
   right: 0px;
 };
 
-.imageHeader, .trackHeader {
+.imageHeader, .trackHeader, .songOverview{
   font-size: 25px;
   padding-bottom: 0.3em;
 };
 
-.trackArtist, .trackAlbum {
+.trackArtist, .trackAlbum,{
   display: inline-block;
 }
 

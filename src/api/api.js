@@ -102,6 +102,7 @@ function callSpotifyApi(processedData) {
             if('album' in response.data.tracks.items[0]){
               let trackInfo = response.data.tracks.items[0];
               let name = trackInfo.name;
+              console.log("success! Track name from Spotify is", name);
               let album = trackInfo.album.name;
               let artist = trackInfo.artists[0].name;
               let uri = trackInfo.uri;
