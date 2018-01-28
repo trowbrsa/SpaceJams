@@ -56,53 +56,48 @@ class InformationModal extends React.Component {
           {this.state.modalVisible && (
             <div className="modal">
               <div>
-                <h1>Space Jams</h1>
-                <main>
-                  <input id="tab1" type="radio" value="tab1"
-                         onChange={this.handleChange}
-                         checked={this.state.selectedOption === 'tab1'} />
-                  <label htmlFor="tab1">Image Info</label>
+                <h1>Space Jamz</h1>
+                <input id="tab1" type="radio" value="tab1"
+                       onChange={this.handleChange}
+                       checked={this.state.selectedOption === 'tab1'} />
+                <label htmlFor="tab1">Image Info</label>
 
-                  <input id="tab2" type="radio" value="tab2"
-                        onChange={this.handleChange}
-                        checked={this.state.selectedOption === 'tab2'}/>
-                  <label htmlFor="tab2">NLP</label>
+                <input id="tab2" type="radio" value="tab2"
+                      onChange={this.handleChange}
+                      checked={this.state.selectedOption === 'tab2'}/>
+                <label htmlFor="tab2">NLP</label>
 
-                  <input id="tab3" type="radio" value="tab3"
-                         onChange={this.handleChange}
-                         checked={this.state.selectedOption === 'tab3'}/>
-                  <label htmlFor="tab3">About</label>
-
-
-                 <section id="image">
-                  <p>
+                <input id="tab3" type="radio" value="tab3"
+                       onChange={this.handleChange}
+                       checked={this.state.selectedOption === 'tab3'}/>
+                <label htmlFor="tab3">About</label>
+                <section id="image">
+                  <p className="imageHeader">
                     {this.props.imageTitle}
                   </p>
                   <p>
                     {this.props.imageExplanation}
                   </p>
-                  <p>
+                  <p className="trackHeader">
                     Track Name: {this.props.trackName}
                   </p>
-                  <p>
+                  <div className="trackArtist">
                     Artist: {this.props.trackArtist}
-                  </p>
-                  <p>
+                  </div>
+                  <div className="trackAlbum">
                     Album: {this.props.trackAlbum}
+                  </div>
+                </section>
+                <section id="nlp">
+                  <p>About NLP</p>
+                </section>
+                <section id="about">
+                  <p>Space Jamz is a project that aims to pair images from <a href="https://apod.nasa.gov/apod/astropix.html">NASA's Astronomy Picture
+                    of the Day</a> with a corresponding song from Spotify. To determine a corresponding song,
+                    the image's title and caption are sent through <a href="https://cloud.google.com/natural-language">Google's Natural Language Processing library</a>.
                   </p>
-                 </section>
-                 <section id="nlp">
-                   <p>
-                     About NLP
-                   </p>
-                 </section>
-                 <section id="about">
-                   <p>
-                     About project
-                   </p>
-                 </section>
-               </main>
-             </div>
+                </section>
+              </div>
             </div>
           )}
       </div>

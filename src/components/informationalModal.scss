@@ -19,15 +19,6 @@ p {
   line-height: 1.5;
 }
 
-main {
-  min-width: 320px;
-  max-width: 800px;
-  padding: 50px;
-  margin: 0 auto;
-  background-color: rgba(0,0,0,0.3);
-;
-}
-
 section {
   display: none;
   padding: 20px 0 0;
@@ -36,6 +27,21 @@ section {
 
 input {
   display: none;
+}
+
+a:link {
+  color: #bbb;
+}
+
+a:visited {
+  color: #888;
+}
+
+a:hover {
+}
+
+a:active {
+
 }
 
 label {
@@ -83,12 +89,13 @@ input:checked + label {
 }
 
 .modal {
-  background-color: rgba(0,0,0,0.5);
-  border-radius: 5;
-  max-width: 500;
-  min-height: 300;
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 5px;
+  max-width: 1000px;
+  min-width: 320px;
+  min-height: 300px;
   margin: 0 auto;
-  padding: 30;
+  padding: 50px;
   position: relative;
   color: white;
   line-height: 1.5px;
@@ -100,4 +107,17 @@ input:checked + label {
   position: fixed;
   bottom: 2px;
   right: 0;
+};
+
+.imageHeader, .trackHeader {
+  font-size: 25px;
+  padding-bottom: 0.3em;
+};
+
+.trackArtist, .trackAlbum {
+  display: inline-block;
+}
+
+.trackArtist {
+  padding-right: 20px;
 }
