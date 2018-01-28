@@ -17,7 +17,6 @@ class InformationModal extends React.Component {
       modalVisible: false,
       selectedOption: 'tab1'
     };
-
   }
 
   handleClick() {
@@ -59,27 +58,47 @@ class InformationModal extends React.Component {
               <div>
                 <h1>Space Jams</h1>
                 <main>
-                  <input id="tab1" type="radio" value="tab1" onChange={this.handleChange} checked={this.state.selectedOption === 'tab1'} />
-                   <label htmlFor="tab1">Content 1</label>
+                  <input id="tab1" type="radio" value="tab1"
+                         onChange={this.handleChange}
+                         checked={this.state.selectedOption === 'tab1'} />
+                  <label htmlFor="tab1">Image Info</label>
 
-                   <input id="tab2" type="radio" value="tab2" onChange={this.handleChange} checked={this.state.selectedOption === 'tab2'}/>
-                   <label htmlFor="tab2">Content 2</label>
+                  <input id="tab2" type="radio" value="tab2"
+                        onChange={this.handleChange}
+                        checked={this.state.selectedOption === 'tab2'}/>
+                  <label htmlFor="tab2">NLP</label>
 
-                   <input id="tab3" type="radio" value="tab3" onChange={this.handleChange} checked={this.state.selectedOption === 'tab3'}/>
-                   <label htmlFor="tab2">Content 3</label>
+                  <input id="tab3" type="radio" value="tab3"
+                         onChange={this.handleChange}
+                         checked={this.state.selectedOption === 'tab3'}/>
+                  <label htmlFor="tab3">About</label>
 
-                   <input id="tab4" type="radio" value="tab4" onChange={this.handleChange} checked={this.state.selectedOption === 'tab4'}/>
-                   <label htmlFor="tab2">Content 4</label>
 
-                 <section id="content1">
+                 <section id="image">
+                  <p>
+                    {this.props.imageTitle}
+                  </p>
+                  <p>
+                    {this.props.imageExplanation}
+                  </p>
+                  <p>
+                    Track Name: {this.props.trackName}
+                  </p>
+                  <p>
+                    Artist: {this.props.trackArtist}
+                  </p>
+                  <p>
+                    Album: {this.props.trackAlbum}
+                  </p>
+                 </section>
+                 <section id="nlp">
                    <p>
-                    Intriguing Info
+                     About NLP
                    </p>
                  </section>
-
-                 <section id="content2">
+                 <section id="about">
                    <p>
-                     More intriguing info
+                     About project
                    </p>
                  </section>
                </main>

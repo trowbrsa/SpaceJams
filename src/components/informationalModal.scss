@@ -8,12 +8,6 @@ html, body {
   height: 100vh;
 }
 
-body {
-  font: 14px/1 'Open Sans', sans-serif;
-  color: #555;
-  background: #eee;
-}
-
 h1 {
   padding: 50px 0;
   font-weight: 400;
@@ -30,7 +24,8 @@ main {
   max-width: 800px;
   padding: 50px;
   margin: 0 auto;
-  background: #fff;
+  background-color: rgba(0,0,0,0.3);
+;
 }
 
 section {
@@ -65,22 +60,21 @@ input:checked + label {
   border-bottom: 1px solid #fff;
 }
 
-#tab1:checked ~ #content1,
-#tab2:checked ~ #content2,
-#tab3:checked ~ #content3,
-#tab4:checked ~ #content4 {
+#tab1:checked ~ #image,
+#tab2:checked ~ #nlp,
+#tab3:checked ~ #about {
   display: block;
 }
 
-// @media screen and (max-width: 650px) {
-//   label {
-//     font-size: 0;
-//   }
-//   label:before {
-//     margin: 0;
-//     font-size: 18px;
-//   }
-// }
+@media screen and (max-width: 650px) {
+  label {
+    font-size: 0;
+  }
+  label:before {
+    margin: 0;
+    font-size: 18px;
+  }
+}
 
 @media screen and (max-width: 400px) {
   label {
@@ -104,6 +98,6 @@ input:checked + label {
 
 .informationIcon {
   position: fixed;
-  bottom: '2px';
+  bottom: 2px;
   right: 0;
 }
