@@ -10,6 +10,7 @@ class App extends Component {
     super();
 
     this.state = {
+      songAvailable: data.songAvailable,
       image: data.image_data.hdurl,
       imageTitle: data.image_data.title,
       explanation: data.image_data.explanation,
@@ -30,10 +31,22 @@ class App extends Component {
     }
   }
 
+  // function songAvailablility(){
+  //   const isSongAvailable = this.state.SongAvailable = true;
+  //   if(isSongAvailable){
+  //     console.log("Song is available!")
+  //   }
+  //   console.log("no song available :(")
+  //   // return <NoSongAvailable />;
+  // }
+
   render(){
 
     return(
       <div>
+        {!this.state.songAvailable &&
+          <h1>Song is not available!</h1>
+        }
         <Image image={this.state.image}/>
         <Track
           trackUri={this.state.trackUri}

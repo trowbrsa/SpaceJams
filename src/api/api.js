@@ -12,7 +12,9 @@ const NASA_API_KEY = process.env.NASA_KEY;
 const SPOTIFY_ID = process.env.SPOTIFY_ID;
 const SPOTIFY_SECRET = process.env.SPOTIFY_SECRET;
 
-let apiData = {};
+let apiData = {
+  'song_available': 'false'
+};
 
 const callAPI = function() {
   axios.get(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`)
@@ -113,6 +115,7 @@ function callSpotifyApi(processedData) {
   .then(response => {
     if(response.data.tracks.items.length > 0){
       if('album' in response.data.tracks.items[0]){
+        // add the first track ONLY to the dailyData.json file
         let trackInfo = response.data.tracks.items[0];
         let name = trackInfo.name;
         console.log("success! Track name from Spotify is", name);
@@ -125,7 +128,8 @@ function callSpotifyApi(processedData) {
             'album': album,
             'artist': artist,
             'uri': uri
-          }
+          };
+        apiData.song_available = "true";
         jsonFile.writeFile(file, apiData);
         return resolve();
       }
