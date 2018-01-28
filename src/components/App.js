@@ -13,6 +13,7 @@ class App extends Component {
       image: data.image_data.hdurl,
       imageTitle: data.image_data.title,
       explanation: data.image_data.explanation,
+      copyright: data.image_data.copyright,
       trackUri: data.track_data.uri,
       trackName: data.track_data.name,
       trackAlbum: data.track_data.album,
@@ -40,6 +41,7 @@ class App extends Component {
        <InformationModal
           imageTitle={this.state.imageTitle}
           imageExplanation={this.state.explanation}
+          copyright={this.state.copyright}
           trackName={this.state.trackName}
           trackArtist={this.state.trackArtist}
           trackAlbum={this.state.trackAlbum}

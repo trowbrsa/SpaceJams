@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './informationModal.css';
 import './informationalModal.scss';
-import closeIcon from '../../public/ic_close_white_24dp_2x.png';
+import closeIcon from '../../public/ic_close_white_18dp_2x.png';
 import icon from '../../public/ic_info_black_24dp_2x.png';
 
 class InformationModal extends React.Component {
@@ -48,59 +48,62 @@ class InformationModal extends React.Component {
       <div
         className="modal-wrapper"
         ref={node => {this.node = node;}}>
-        <div>
-          <span className='informationIcon'
-            onClick={this.handleClick}>
-            <img src={icon} alt="more info" />
-          </span>
-          {this.state.modalVisible && (
-            <div className="modal">
-              <div>
-                <h1>Space Jamz</h1>
-                <input id="tab1" type="radio" value="tab1"
-                       onChange={this.handleChange}
-                       checked={this.state.selectedOption === 'tab1'} />
-                <label htmlFor="tab1">Image Info</label>
+        <span className='informationIcon'
+          onClick={this.handleClick}>
+          <img src={icon} alt="more info" />
+        </span>
+        {this.state.modalVisible && (
+          <div className="modal">
+            <span className='closeIcon'
+              onClick={this.handleClick}>
+              <img src={closeIcon} alt="close modal" />
+            </span>
+            <div>
+              <h1>Space Jamz</h1>
+              <input id="tab1" type="radio" value="tab1"
+                     onChange={this.handleChange}
+                     checked={this.state.selectedOption === 'tab1'} />
+              <label htmlFor="tab1">Image Info</label>
 
-                <input id="tab2" type="radio" value="tab2"
-                      onChange={this.handleChange}
-                      checked={this.state.selectedOption === 'tab2'}/>
-                <label htmlFor="tab2">NLP</label>
+              <input id="tab2" type="radio" value="tab2"
+                    onChange={this.handleChange}
+                    checked={this.state.selectedOption === 'tab2'}/>
+              <label htmlFor="tab2">NLP</label>
 
-                <input id="tab3" type="radio" value="tab3"
-                       onChange={this.handleChange}
-                       checked={this.state.selectedOption === 'tab3'}/>
-                <label htmlFor="tab3">About</label>
-                <section id="image">
-                  <p className="imageHeader">
-                    {this.props.imageTitle}
-                  </p>
-                  <p>
-                    {this.props.imageExplanation}
-                  </p>
-                  <p className="trackHeader">
-                    Track Name: {this.props.trackName}
-                  </p>
-                  <div className="trackArtist">
-                    Artist: {this.props.trackArtist}
-                  </div>
-                  <div className="trackAlbum">
-                    Album: {this.props.trackAlbum}
-                  </div>
-                </section>
-                <section id="nlp">
-                  <p>About NLP</p>
-                </section>
-                <section id="about">
-                  <p>Space Jamz is a project that aims to pair images from <a href="https://apod.nasa.gov/apod/astropix.html">NASA's Astronomy Picture
-                    of the Day</a> with a corresponding song from Spotify. To determine a corresponding song,
-                    the image's title and caption are sent through <a href="https://cloud.google.com/natural-language">Google's Natural Language Processing library</a>.
-                  </p>
-                </section>
-              </div>
+              <input id="tab3" type="radio" value="tab3"
+                     onChange={this.handleChange}
+                     checked={this.state.selectedOption === 'tab3'}/>
+              <label htmlFor="tab3">About</label>
+              <section id="image">
+                <p className="imageHeader">
+                  {this.props.imageTitle}
+                </p>
+                <p>
+                  {this.props.imageExplanation}
+                </p>
+                <p>Image copyright: {this.props.copyright}</p>
+                <p className="trackHeader">
+                  Track Name: {this.props.trackName}
+                </p>
+                <div className="trackArtist">
+                  Artist: {this.props.trackArtist}
+                </div>
+                <div className="trackAlbum">
+                  Album: {this.props.trackAlbum}
+                </div>
+              </section>
+              <section id="nlp">
+                <p>About NLP</p>
+              </section>
+              <section id="about">
+                <p>Space Jamz is a project that aims to pair images from <a href="https://apod.nasa.gov/apod/astropix.html">NASA's Astronomy Picture
+                  of the Day</a> with a corresponding song from Spotify. To determine a corresponding song,
+                  the image's title and caption are sent through <a href="https://cloud.google.com/natural-language">Google's Natural Language Processing library</a>.
+                </p>
+              </section>
             </div>
-          )}
-      </div>
+          </div>
+        )}
     </div>
     );
   }
