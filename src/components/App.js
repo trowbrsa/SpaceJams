@@ -9,17 +9,6 @@ class App extends Component {
   constructor(){
     super();
 
-    let takenTour = false;
-
-    if (typeof(Storage) !== "undefined") {
-      let takenTour = localStorage.getItem("takenTour");
-      if (!takenTour) {
-        localStorage.setItem("takenTour", true);
-      }
-    }
-
-    localStorage.setItem('visited', 'true');
-
     this.state = {
       songAvailable: data.songAvailable,
       image: data.image_data.hdurl,
@@ -38,26 +27,29 @@ class App extends Component {
       nlpResult2Name: data.nlp_data2.name,
       nlpResult2Salience: data.nlp_data2.salience,
       nlpResult3Name: data.nlp_data3.name,
-      nlpresult3Salience: data.nlp_data3.salience
+      nlpresult3Salience: data.nlp_data3.salience,
+      takenTour: false,
     }
   }
 
-  // function songAvailablility(){
-  //   const isSongAvailable = this.state.SongAvailable = true;
-  //   if(isSongAvailable){
-  //     console.log("Song is available!")
-  //   }
-  //   console.log("no song available :(")
-  //   // return <NoSongAvailable />;
-  // }
+  componentDidMount(){
+    if (localStorage.getItem("takenTour") !== null) {
+      this.setState({
+        takenTour: true
+      })
+    }
+    localStorage.setItem("takenTour", true);
+  }
 
   render(){
 
     return(
       <div>
-        {!takenTour &&
-        <h2>
-        Welcome!</h2>}
+        {!this.state.takenTour &&
+        <h2>Welcome!</h2>}
+        {!this.state.songAvailable &&
+         <h1>Song is not available!</h1>
+        }
         <Image image={this.state.image}/>
         <Track
           trackUri={this.state.trackUri}
