@@ -9,6 +9,17 @@ class App extends Component {
   constructor(){
     super();
 
+    let takenTour = false;
+
+    if (typeof(Storage) !== "undefined") {
+      let takenTour = localStorage.getItem("takenTour");
+      if (!takenTour) {
+        localStorage.setItem("takenTour", true);
+      }
+    }
+
+    localStorage.setItem('visited', 'true');
+
     this.state = {
       image: data.image_data.hdurl,
       imageTitle: data.image_data.title,
@@ -30,10 +41,14 @@ class App extends Component {
     }
   }
 
+
   render(){
 
     return(
       <div>
+        {!takenTour &&
+        <h2>
+        Welcome!</h2>}
         <Image image={this.state.image}/>
         <Track
           trackUri={this.state.trackUri}
