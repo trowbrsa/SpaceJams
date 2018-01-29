@@ -9,6 +9,17 @@ class App extends Component {
   constructor(){
     super();
 
+    let takenTour = false;
+
+    if (typeof(Storage) !== "undefined") {
+      let takenTour = localStorage.getItem("takenTour");
+      if (!takenTour) {
+        localStorage.setItem("takenTour", true);
+      }
+    }
+
+    localStorage.setItem('visited', 'true');
+
     this.state = {
       songAvailable: data.songAvailable,
       image: data.image_data.hdurl,
@@ -44,9 +55,9 @@ class App extends Component {
 
     return(
       <div>
-        {!this.state.songAvailable &&
-          <h1>Song is not available!</h1>
-        }
+        {!takenTour &&
+        <h2>
+        Welcome!</h2>}
         <Image image={this.state.image}/>
         <Track
           trackUri={this.state.trackUri}
