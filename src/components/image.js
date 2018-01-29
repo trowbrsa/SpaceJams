@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './image.scss';
 import PropTypes from 'prop-types';
 
 class Image extends Component {
@@ -7,19 +8,8 @@ class Image extends Component {
   }
 
   render(){
-
-    const imageContainerStyle = {
-      minHeight: '100%',
-      minWidth: '1024px',
-      width: '100%',
-      height: 'auto',
-      position: 'fixed',
-      top: 0,
-      left: 0,
-    };
-
     return (
-      <img className="imageContainer" style={imageContainerStyle} src={this.props.image}/>
+      <img className="imageContainer" src={this.props.image}/>
     )
   }
 }

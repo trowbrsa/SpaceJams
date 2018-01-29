@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import style from './track.css';
+import style from './track.scss';
 
 class Track extends Component {
   constructor(props){
     super(props);
   }
 
-
   render(){
-
     return (
       <div className="trackContainer" style={style.trackContainerStyle}>
         <iframe

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import FirstTimeVisitorModal from './FirstTimeVisitorModal';
 import Image from './Image';
-import Track from './Track';
 import InformationModal from './InformationModal'
+import Track from './Track';
 import data from '../../dailyData.json';
 
 class App extends Component {
@@ -33,12 +34,12 @@ class App extends Component {
   }
 
   componentDidMount(){
-    if (localStorage.getItem("takenTour") !== null) {
-      this.setState({
-        takenTour: true
-      })
-    }
-    localStorage.setItem("takenTour", true);
+    // if (localStorage.getItem("takenTour") !== null) {
+    //   this.setState({
+    //     takenTour: true
+    //   })
+    // }
+    // localStorage.setItem("takenTour", true);
   }
 
   render(){
@@ -46,11 +47,10 @@ class App extends Component {
     return(
       <div>
         {!this.state.takenTour &&
-        <h2>Welcome!</h2>}
+        <FirstTimeVisitorModal />}
         {!this.state.songAvailable &&
          <h1>Song is not available!</h1>
         }
-        <Image image={this.state.image}/>
         <Track
           trackUri={this.state.trackUri}
         />
