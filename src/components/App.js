@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import FirstTimeVisitorModal from './FirstTimeVisitorModal';
-import Image from './Image';
-import InformationModal from './InformationModal'
-import Track from './Track';
+import FirstTimeVisitorModal from './FirstTimeVisitorModal/FirstTimeVisitorModal';
+import Image from './Image/Image';
+import InformationModal from './InformationModal/InformationModal'
+import Track from './Track/Track';
 import data from '../../dailyData.json';
 
 class App extends Component {
