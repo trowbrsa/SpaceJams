@@ -59,9 +59,6 @@ function callNLPLibrary(title, explanation) {
   client
     .analyzeEntities({document})
     .then(results => {
-      if(results.status !== 200){
-        throw("Error with Google NLP", status.message);
-      }
       const entities = results[0].entities;
       const numberOfEntityExamples = entities.length > 5 ? 5 : entities.length;
       for(let i = 0; i < numberOfEntityExamples; i++){
@@ -80,18 +77,7 @@ function callNLPLibrary(title, explanation) {
     .catch(err => {
       console.error(err);
     });
-}
-
-// update
-function getSong(processedData, token){
-  return new Promise(function(resolve, reject) {
-    let songSearchTerm = processedData.name;
-    let song = '';
-    axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
-      headers: { 'Authorization': 'Bearer ' + token }
-    })
-  })
-}
+};
 
 function callSpotifyApi(processedData) {
   let payload = `${SPOTIFY_ID}:${SPOTIFY_SECRET}`;
@@ -110,37 +96,54 @@ function callSpotifyApi(processedData) {
   })
   .then(response => {
     let token = response.data.access_token;
-    getSong(processedData, token);
-  })
-  .then(response => {
-    if(response.data.tracks.items.length > 0){
-      if('album' in response.data.tracks.items[0]){
-        // add the first track ONLY to the dailyData.json file
-        let trackInfo = response.data.tracks.items[0];
-        let name = trackInfo.name;
-        console.log("success! Track name from Spotify is", name);
-        let album = trackInfo.album.name;
-        let artist = trackInfo.artists[0].name;
-        let uri = trackInfo.uri;
-        apiData.track_data =
-          {
-            'name': name,
-            'album': album,
-            'artist': artist,
-            'uri': uri
-          };
-        apiData.song_available = "true";
-        jsonFile.writeFile(file, apiData);
-        return resolve();
-      }
-    }
-  })
-  .catch(error => {
-    console.log("Error with Spotify", error);
-  })
-  processedData.find(getSong);
-}
+    let getSong = function(entity){
+      return new Promise(function(resolve) {
+        let songSearchTerm = entity.name;
+        let song = '';
+        axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
+          headers: { 'Authorization': 'Bearer ' + token }
+        })
+        .then(response => {
+          if(response.data.tracks.items.length > 0){
+            if('album' in response.data.tracks.items[0]){
+              let trackInfo = response.data.tracks.items[0];
+              let name = trackInfo.name;
+              console.log("success! Track name from Spotify is", name);
+              let album = trackInfo.album.name;
+              let artist = trackInfo.artists[0].name;
+              let uri = trackInfo.uri;
+              apiData.track_data =
+                {
+                  'name': name,
+                  'album': album,
+                  'artist': artist,
+                  'uri': uri
+                }
 
+              jsonFile.writeFile(file, apiData);
+              return resolve();
+            }
+          }
+          // no song found, use default
+          // this isn't working
+          song = '3gdewACMIVMEWVbyb8O9sY';
+          apiData.track_data =
+            {
+              'name': 'Test',
+              'song': song
+            }
+          console.log("use default song!");
+          jsonFile.writeFile(file, apiData);
+          return reject(song);
+        })
+        .catch(error => {
+          console.log("Error with Spotify", error);
+        })
+      })
+    }
+    processedData.find(getSong);
+  })
+}
 
 const main = () => {
   callAPI();

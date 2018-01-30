@@ -46,15 +46,11 @@ class App extends Component {
 
     return(
       <div>
+        <Image image={this.state.image}/>
         {!this.state.takenTour &&
-        <FirstTimeVisitorModal />}
-        {!this.state.songAvailable &&
-         <h1>Song is not available!</h1>
-        }
-        <Track
-          trackUri={this.state.trackUri}
-        />
-       <InformationModal
+        <FirstTimeVisitorModal/>}
+        <Track trackUri={this.state.trackUri}/>
+        <InformationModal
           imageTitle={this.state.imageTitle}
           imageExplanation={this.state.explanation}
           copyright={this.state.copyright}
