@@ -29,9 +29,14 @@ export default {
         use:['style-loader','css-loader', 'sass-loader'],
         include: __dirname + '/src'
       },
-      { test: /\.(png|jpg)$/,
+      {
+        test: /\.(png|jpg)$/,
         loader: 'url-loader?limit=8192'
       },
+      {
+        test: /\.svg$/,
+        loader: 'file-loader'
+      }
     ]
   },
   node: {

@@ -26,6 +26,8 @@ class App extends Component {
     // localStorage.setItem("takenTour", true);
   }
 
+
+
   render(){
     let display = null;
     // if(this.state.loading){

@@ -30,7 +30,6 @@ class MainScreen extends Component {
       nlpResult3Name: data.nlp_data3.name,
       nlpresult3Salience: data.nlp_data3.salience,
       // takenTour: false,
-      // loading: true,
     }
   }
 
