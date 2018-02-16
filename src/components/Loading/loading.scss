@@ -1,3 +1,13 @@
+p {
+  font-size: 30px;
+  color: red;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transform: translateX(50%);
+
+}
+
 .loading{
   position: relative;
   min-height: 100%;

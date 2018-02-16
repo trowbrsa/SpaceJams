@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 // import InformationModal from './InformationModal/InformationModal'
 // import Track from './Track/Track';
 import data from '../../dailyData.json';
+import Loading from './Loading/Loading';
 import MainScreen from './MainScreen';
 
 class App extends Component {
@@ -31,9 +32,9 @@ class App extends Component {
   render(){
     let display = null;
     // if(this.state.loading){
-    //   display = <LoadingScreen/>
+      display = <Loading/>
     // } else {
-    display = <MainScreen />
+    // display = <MainScreen />
     // }
 
     return(

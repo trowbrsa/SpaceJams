@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import style from './track.scss';
+import style from './loading.scss';
+import spaceFont from '../../../public/space_age.ttf';
 
 class Loading extends Component {
   constructor(props){
@@ -10,7 +11,9 @@ class Loading extends Component {
   render(){
     return (
       <div className="loading">
-        Loading SpaceJams
+        <div style={{ fontFamily: spaceFont}}>
+          <p>Loading SpaceJamz</p>
+        </div>
       </div>
     )
   }
