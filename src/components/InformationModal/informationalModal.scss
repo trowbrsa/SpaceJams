@@ -107,6 +107,7 @@ input:checked + label {
   position: absolute;
   bottom: 2px;
   right: 0px;
+  filter: grayscale(50%);
 };
 
 .imageHeader, .trackHeader, .songOverview{

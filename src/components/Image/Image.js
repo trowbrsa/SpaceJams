@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import FirstTimeVisitorModal from '../FirstTimeVisitorModal/FirstTimeVisitorModal';
 import './image.scss';
+import '../FirstTimeVisitorModal/firstTimeVisitorModal.scss';
 import PropTypes from 'prop-types';
 
 class Image extends Component {
@@ -7,9 +9,21 @@ class Image extends Component {
     super(props);
   }
 
+
+
   render(){
+    let backgroundImage = {
+      background: 'url(' + this.props.image + ')',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      backgroundSize: 'cover',
+    }
+
     return (
-      <img className="imageContainer" src={this.props.image}/>
+      <div>
+        <img className="imageContainer" style={backgroundImage}/>
+      </div>
     )
   }
 }
