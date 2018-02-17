@@ -1,21 +1,21 @@
-// .spaceFont {
-//   font-size: 30px;
-//   color: red;
-//   position: absolute;
-//   top: 50%;
-//   transform: translateY(-50%);
-//   transform: translateX(50%);
-//
-// }
-//
-// .loading{
-//   position: relative;
-//   min-height: 100%;
-//   min-width: 1024px;
-//   width: 100%;
-//   height: auto;
-//   position: fixed;
-//   top: 0px;
-//   left: 0px;
-//   background-color: black;
-// }
+.spaceFont {
+  font-size: 30px;
+  color: red;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transform: translateX(50%);
+
+}
+
+.loading{
+  position: relative;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: black;
+}
