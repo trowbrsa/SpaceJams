@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './informationalModal.scss';
 import closeIcon from '../../../public/ic_close_white_18dp_2x.png';
 import icon from '../../../public/ic_info_black_24px.svg';
+import spaceFont from '../../../public/space_age.ttf';
 
 class InformationModal extends React.Component {
   constructor(props){
@@ -59,7 +60,7 @@ class InformationModal extends React.Component {
               <img src={closeIcon} alt="close modal" />
             </span>
             <div>
-              <h1>Space Jamz</h1>
+              <h1 style={{ fontFamily: spaceFont}}>Space Jamz</h1>
               <input id="tab1" type="radio" value="tab1"
                      onChange={this.handleChange}
                      checked={this.state.selectedOption === 'tab1'} />

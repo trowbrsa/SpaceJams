@@ -32,9 +32,9 @@ class App extends Component {
   render(){
     let display = null;
     // if(this.state.loading){
-      display = <Loading/>
+      // display = <Loading/>
     // } else {
-    // display = <MainScreen />
+    display = <MainScreen />
     // }
 
     return(

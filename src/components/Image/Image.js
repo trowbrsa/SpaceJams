@@ -7,28 +7,30 @@ import PropTypes from 'prop-types';
 class Image extends Component {
   constructor(props){
     super(props);
-    this.handleImageLoaded = this.handleImageLoaded.bind(this);
+    this.state = {loading: false};
+    //this.handleImageLoaded = this.handleImageLoaded.bind(this);
   }
 
-  componentDidMount(){
-    let img = document.getElementById("image");
-    img.onload = function(){
-      console.log("it has truly loaded");
-    }
-    // img.addEventListener('load', function() {console.log("it loaded")})
+  // componentDidMount(){
+  //   let img = document.getElementById("image");
+  //   img.onload = function(){
+  //     console.log("it has truly loaded");
+  //   }
+  //   // img.addEventListener('load', function() {console.log("it loaded")})
+  //
+  //   if(img.complete){
+  //     console.log("it already loaded");
+  //     img.load();
+  //   } else {
+  //     console.log("not complete?");
+  //   }
+  // }
 
-    if(img.complete){
-      console.log("it already loaded");
-      img.load();
-    } else {
-      console.log("not complete?");
-    }
-  }
 
-
-  handleImageLoaded() {
-    console.log("loaded image!");
-  }
+  // handleImageLoaded() {
+  //
+  //   console.log("loaded image!");
+  // }
 
   render(){
     let backgroundImage = {
@@ -37,6 +39,7 @@ class Image extends Component {
       backgroundRepeat: 'no-repeat',
       backgroundAttachment: 'fixed',
       backgroundSize: 'cover',
+      opacity: this.state.loaded === false ? '0' : null
     }
 
     return (
@@ -44,7 +47,7 @@ class Image extends Component {
         <img
           id="image"
           style={backgroundImage}
-          onLoad={this.handleImageLoaded.bind(this)}
+          onLoad={(e) => {this.setState({loaded: true});}}
         />
       </div>
     )

@@ -4,15 +4,12 @@ import style from './loading.scss';
 import spaceFont from '../../../public/space_age.ttf';
 
 class Loading extends Component {
-  constructor(props){
-    super(props);
-  }
 
   render(){
     return (
       <div className="loading">
         <div style={{ fontFamily: spaceFont}}>
-          <p>Loading SpaceJamz</p>
+          <p>SpaceJamz</p>
         </div>
       </div>
     )
