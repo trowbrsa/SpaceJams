@@ -7,22 +7,22 @@ import PropTypes from 'prop-types';
 class Image extends Component {
   constructor(props){
     super(props);
-    this.state = {loading: false};
+    this.state = {loading: true};
   }
 
   render(){
-    if(this.state.loading){
-      <Loading/>
-    } else {
-      let backgroundImage = {
-        background: 'url(' + this.props.image + ')',
-        backgroundPosition: 'center center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'cover',
-        opacity: this.state.loading === false ? null : '0'
-      }
-      return (
+    let backgroundImage = {
+      background: 'url(' + this.props.image + ')',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      backgroundSize: 'cover',
+      opacity: this.state.loading === true ? null : 0
+    }
+    const isLoading = this.state.loading;
+    return (
+      <div>
+        {isLoading && <Loading />}
         <div>
           <img
             id="image"
@@ -30,8 +30,8 @@ class Image extends Component {
             onLoad={(e) => {this.setState({loading: false});}}
           />
         </div>
-      )
-    }
+      </div>
+    )
   }
 }
 

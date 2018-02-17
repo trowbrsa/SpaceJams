@@ -36,7 +36,7 @@ class MainScreen extends Component {
 
     return(
       <div>
-        <Image image={this.state.image} takenTour={this.state.takenTour}/>
+        <Image image={this.state.image}/>
         <Track trackUri={this.state.trackUri}/>
         <InformationModal
           imageTitle={this.state.imageTitle}
