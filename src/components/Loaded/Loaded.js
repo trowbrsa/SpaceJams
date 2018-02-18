@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import FirstTimeVisitorModal from './FirstTimeVisitorModal/FirstTimeVisitorModal';
-import Image from './Image/Image';
-import InformationModal from './InformationModal/InformationModal';
-import Track from './Track/Track';
-import data from '../../dailyData.json';
+import FirstTimeVisitorModal from '../FirstTimeVisitorModal/FirstTimeVisitorModal';
+import Image from '../Image/Image';
+import InformationModal from '../InformationModal/InformationModal';
+import Track from '../Track/Track';
+import data from '../../../dailyData.json';
 
-class MainScreen extends Component {
+class Loaded extends Component {
   constructor(){
     super();
+
+    // this.setLoadedBackground = this.setLoadedBackground.bind(this);
 
     this.state = {
       songAvailable: data.songAvailable,
@@ -36,7 +38,11 @@ class MainScreen extends Component {
 
     return(
       <div>
-        <Image image={this.state.image}/>
+        <Image
+          image={this.state.image}
+          setLoadedBackground={this.setLoadedBackground}
+          isLoading={this.props.isLoading}
+        />
         <Track trackUri={this.state.trackUri}/>
         <InformationModal
           imageTitle={this.state.imageTitle}
@@ -60,4 +66,4 @@ class MainScreen extends Component {
   }
 }
 
-export default MainScreen;
+export default Loaded;

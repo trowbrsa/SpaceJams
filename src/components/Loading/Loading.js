@@ -8,9 +8,7 @@ class Loading extends Component {
   render(){
     return (
       <div className="loading">
-        <div style={{ fontFamily: spaceFont}}>
-          <p>SpaceJamz</p>
-        </div>
+        <div style={{ fontFamily: spaceFont}}>SpaceJamz</div>
       </div>
     )
   }

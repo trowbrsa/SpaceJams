@@ -76,7 +76,7 @@ class InformationModal extends React.Component {
                      checked={this.state.selectedOption === 'tab3'}/>
               <label htmlFor="tab3">About</label>
 
-              <section id="image">
+              <section id="imageInfo">
                 <p className="imageHeader">
                   {this.props.imageTitle}
                 </p>

@@ -67,7 +67,7 @@ input:checked + label {
   border-bottom: 1px solid #fff;
 }
 
-#tab1:checked ~ #image,
+#tab1:checked ~ #imageInfo,
 #tab2:checked ~ #nlp,
 #tab3:checked ~ #about {
   display: block;

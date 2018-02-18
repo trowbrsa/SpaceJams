@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 class Image extends Component {
   constructor(props){
     super(props);
-    this.state = {loading: true};
   }
+
 
   render(){
     let backgroundImage = {
@@ -17,19 +17,16 @@ class Image extends Component {
       backgroundRepeat: 'no-repeat',
       backgroundAttachment: 'fixed',
       backgroundSize: 'cover',
-      opacity: this.state.loading === true ? null : 0
+      opacity: this.props.isLoading === true ? null : 0
     }
-    const isLoading = this.state.loading;
+    // is loading AND time has been greater than or equal to 5 seconds.
     return (
       <div>
-        {isLoading && <Loading />}
-        <div>
-          <img
-            id="image"
-            style={backgroundImage}
-            onLoad={(e) => {this.setState({loading: false});}}
-          />
-        </div>
+        <img
+          id="image"
+          style={backgroundImage}
+          onLoad={(e) => {this.props.setLoadedBackground}}
+        />
       </div>
     )
   }
