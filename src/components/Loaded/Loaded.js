@@ -43,7 +43,9 @@ class Loaded extends Component {
           setLoadedBackground={this.setLoadedBackground}
           isLoading={this.props.isLoading}
         />
-        <Track trackUri={this.state.trackUri}/>
+        <Track
+          trackUri={this.state.trackUri}
+          isLoading={this.props.isLoading}/>
         <InformationModal
           imageTitle={this.state.imageTitle}
           imageExplanation={this.state.explanation}
@@ -60,6 +62,7 @@ class Loaded extends Component {
           nlpData2Salience={this.state.nlpResult2Salience}
           nlpData3Name={this.state.nlpResult2Name}
           nlpData3Salience={this.state.nlpResult3Salience}
+          isLoading={this.props.isLoading}
         />
       </div>
     );

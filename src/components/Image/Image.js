@@ -9,6 +9,9 @@ class Image extends Component {
     super(props);
   }
 
+  componentDidMount(){
+    this.props.setLoadedBackground
+  }
 
   render(){
     let backgroundImage = {
@@ -25,7 +28,7 @@ class Image extends Component {
         <img
           id="image"
           style={backgroundImage}
-          onLoad={(e) => {this.props.setLoadedBackground}}
+          onLoad={(e) => componentDidMount()}
         />
       </div>
     )

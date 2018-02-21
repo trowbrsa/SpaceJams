@@ -45,13 +45,19 @@ class InformationModal extends React.Component {
   }
 
   render() {
+    let hideWhileLoading = {
+      opacity: this.props.isLoading === true ? null : 0
+    }
     return (
       <div
         className="modal-wrapper"
         ref={node => {this.node = node;}}>
-        <span className='informationIcon'
-          onClick={this.handleClick}>
-          <img src={icon} alt="more info" />
+        <span className='informationIcon' onClick={this.handleClick}>
+          <img
+            src={icon}
+            alt="more info"
+            style={hideWhileLoading}
+          />
         </span>
         {this.state.modalVisible && (
           <div className="modal">

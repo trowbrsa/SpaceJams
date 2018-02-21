@@ -22,7 +22,6 @@ class App extends Component {
 
   setLoadedBackground(e){
     e.preventDefault();
-    console.log("no longer loading!");
     this.setState({
       isLoading: false
     })
@@ -34,14 +33,11 @@ class App extends Component {
 
     return(
       <div>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Loaded
-            setLoadedBackground = {this.setLoadedBackground}
-            isLoading = {this.state.isLoading}
-          />
-        )}
+        {isLoading && <Loading />}
+        <Loaded
+          setLoadedBackground = {this.setLoadedBackground}
+          isLoading = {this.state.isLoading}
+        />
       </div>
     );
   }
