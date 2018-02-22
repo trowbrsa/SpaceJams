@@ -1,10 +1,10 @@
-import AppRoot from './AppRoot/AppRoot';
+import Container from './Container/Container';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 const app = {
   initialize() {
-    ReactDOM.render(<AppRoot/>, document.getElementById('root'));
+    ReactDOM.render(<Container/>, document.getElementById('root'));
   }
 };
 

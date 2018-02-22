@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Image from '../Image/Image';
-import InformationModal from '../InformationModal/InformationModal';
 import Loading from '../Loading/Loading';
 import Loaded from '../Loaded/Loaded';
-import Track from '../Track/Track';
-import data from '../../../dailyData.json';
 
-class AppRoot extends Component {
+class Container extends Component {
   constructor(props){
     super(props);
 
@@ -41,4 +37,4 @@ class AppRoot extends Component {
   }
 }
 
-export default AppRoot;
+export default Container;

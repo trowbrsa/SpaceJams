@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import FirstTimeVisitorModal from '../FirstTimeVisitorModal/FirstTimeVisitorModal';
-import Image from '../Image/Image';
-import InformationModal from '../InformationModal/InformationModal';
-import Track from '../Track/Track';
+import Image from './Image/Image';
+import InformationModal from './InformationModal/InformationModal';
+import Track from './Track/Track';
 import data from '../../../dailyData.json';
 
 class Loaded extends Component {
@@ -42,7 +41,8 @@ class Loaded extends Component {
         />
         <Track
           trackUri={this.state.trackUri}
-          isLoading={this.props.isLoading}/>
+          isLoading={this.props.isLoading}
+        />
         <InformationModal
           imageTitle={this.state.imageTitle}
           imageExplanation={this.state.explanation}

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import closeIcon from '../../../../public/ic_close_white_18dp_2x.png';
+import icon from '../../../../public/ic_info_black_24px.svg';
+// import spaceFont from '../../../../public/space_age.ttf';
 import './informationalModal.scss';
-import closeIcon from '../../../public/ic_close_white_18dp_2x.png';
-import icon from '../../../public/ic_info_black_24px.svg';
-import spaceFont from '../../../public/space_age.ttf';
 
 class InformationModal extends React.Component {
   constructor(props){
