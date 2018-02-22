@@ -89,7 +89,7 @@ class InformationModal extends React.Component {
                 <p>
                   {this.props.imageExplanation}
                 </p>
-                <p>Image copyright: {this.props.copyright}</p>
+                {this.props.copyright && <p>Image copyright: {this.props.copyright}</p>}
               </section>
               <section id="nlp">
                 <p className="trackHeader">
@@ -112,7 +112,7 @@ class InformationModal extends React.Component {
                     <li>{this.props.nlpData1Name}</li>
                     <li>{this.props.nlpData2Name}</li>
                   </ul>
-                  <p>Spotify was able to find a song with this keyword.</p>
+                  <p>Spotify was able to find a song with one of the above keywords.</p>
               </section>
               <section id="about">
                 <p>Space Jamz is a project that aims to pair images from <a href="https://apod.nasa.gov/apod/astropix.html">NASA's Astronomy Picture
