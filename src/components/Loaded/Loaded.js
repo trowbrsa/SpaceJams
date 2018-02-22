@@ -10,8 +10,6 @@ class Loaded extends Component {
   constructor(){
     super();
 
-    // this.setLoadedBackground = this.setLoadedBackground.bind(this);
-
     this.state = {
       songAvailable: data.songAvailable,
       image: data.image_data.hdurl,
@@ -35,7 +33,6 @@ class Loaded extends Component {
   }
 
   render(){
-
     return(
       <div>
         <Image

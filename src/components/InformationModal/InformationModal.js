@@ -66,7 +66,7 @@ class InformationModal extends React.Component {
               <img src={closeIcon} alt="close modal" />
             </span>
             <div>
-              <h1 style={{ fontFamily: spaceFont}}>Space Jamz</h1>
+              <h1>Space Jamz</h1>
               <input id="tab1" type="radio" value="tab1"
                      onChange={this.handleChange}
                      checked={this.state.selectedOption === 'tab1'} />
