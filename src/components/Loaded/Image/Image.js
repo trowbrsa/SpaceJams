@@ -24,7 +24,6 @@ const Image = props => {
 
 Image.propTypes = {
   image: PropTypes.string,
-  isLoading: PropTypes.boolean
 };
 
 export default Image;

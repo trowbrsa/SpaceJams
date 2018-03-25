@@ -16,6 +16,7 @@ class Container extends Component {
 
   setLoadedBackground(e){
     e.preventDefault();
+    console.log("in set Loaded Background method")
     this.setState({
       isLoading: false
     })
