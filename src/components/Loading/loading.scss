@@ -1,11 +1,8 @@
-.spaceFont{
-  font-size: 30px;
-  color: red;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  transform: translateX(50%);
-
+h1 {
+  padding: 50px 0;
+  font-weight: 400;
+  text-align: center;
+  color: white;
 }
 
 .loading{
