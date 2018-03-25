@@ -20,6 +20,7 @@ class AppRoot extends Component {
 
   setLoadedBackground(e){
     e.preventDefault();
+    console.log("in set Loaded Background method")
     this.setState({
       isLoading: false
     })

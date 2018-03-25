@@ -130,7 +130,9 @@ function callSpotifyApi(processedData) {
           apiData.track_data =
             {
               'name': 'Test',
-              'song': song
+              'album': 'Look This Up',
+              'artist': 'David Bowie',
+              'uri': song
             }
           console.log("use default song!");
           jsonFile.writeFile(file, apiData);
