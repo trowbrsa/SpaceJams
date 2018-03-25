@@ -36,7 +36,7 @@ class Loaded extends Component {
       <div>
         <Image
           image={this.state.image}
-          setLoadedBackground={this.setLoadedBackground}
+          setLoadedBackground={this.props.setLoadedBackground}
           isLoading={this.props.isLoading}
         />
         <Track

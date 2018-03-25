@@ -51,7 +51,9 @@ class InformationModal extends React.Component {
       <div
         className="modal-wrapper"
         ref={node => {this.node = node;}}>
-        <span className='informationIcon' onClick={this.handleClick}>
+        <span className='informationIcon'
+          onClick={this.handleClick}
+          style={hideWhileLoading}>
           <img
             src={icon}
             alt="more info"

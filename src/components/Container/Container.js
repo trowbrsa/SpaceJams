@@ -15,7 +15,7 @@ class Container extends Component {
   }
 
   setLoadedBackground(e){
-    e.preventDefault();
+    //  e.preventDefault();
     console.log("in set Loaded Background method")
     this.setState({
       isLoading: false
@@ -26,6 +26,9 @@ class Container extends Component {
 
     const isLoading = this.state.isLoading;
 
+    // while image is loading, isLoading evaluates to true. So
+    // long as image is loading, opacity remains at zero.
+    // When image loads, opacity updates to 1.
     return(
       <div>
         {isLoading && <Loading />}
