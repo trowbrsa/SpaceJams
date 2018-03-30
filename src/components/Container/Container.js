@@ -1,41 +1,54 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Loading from '../Loading/Loading';
+import InformationModal from '../InformationModal/InformationModal';
+import Track from '../Track/Track';
+import data from '../../../dailyData.json';
 import Loaded from '../Loaded/Loaded';
+
+/// import dailyData here and then write function that grabs background image 
+// and sets image as background image when it's loaded and sets this.state.isLoaded = false when its done
+// set background image on container 
 
 class Container extends Component {
   constructor(props){
     super(props);
 
-    this.setLoadedBackground = this.setLoadedBackground.bind(this);
-
     this.state = {
-      isLoading: true,
+      isLoading: true
+    };
+
+    this.image = data.image_data.hdurl;
+  }
+  
+  componentDidMount() {
+    const backgroundImage = new Image();
+    backgroundImage.src = this.image;
+    
+    backgroundImage.onload = () => {
+      this.container.setAttribute(
+        'style',
+        `
+          height: 100%;
+          background: #000 url('${this.image}') no-repeat center;
+          background-size: cover;
+        `
+      );
+      
+      this.setState({
+        isLoading: false
+      });
     }
   }
 
-  setLoadedBackground(e){
-    //  e.preventDefault();
-    console.log("in set Loaded Background method")
-    this.setState({
-      isLoading: false
-    })
-  }
-
-  render(){
-
-    const isLoading = this.state.isLoading;
-
-    // while image is loading, isLoading evaluates to true. So
-    // long as image is loading, opacity remains at zero.
-    // When image loads, opacity updates to 1.
-    return(
-      <div>
-        {isLoading && <Loading />}
-        <Loaded
-          setLoadedBackground = {this.setLoadedBackground}
-          isLoading = {this.state.isLoading}
-        />
+  render() {
+    return (
+      <div style={{height: '100vh', backgroundColor: '#000'}}>
+        <div ref={container => this.container = container} />
+        
+        
+        {this.state.isLoading ? 'Space Jamz' : <div> <Track /> <InformationModal /> </div>}
+        <div>Space Jamz</div>
       </div>
     );
   }

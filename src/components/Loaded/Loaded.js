@@ -6,8 +6,8 @@ import Track from './Track/Track';
 import data from '../../../dailyData.json';
 
 class Loaded extends Component {
-  constructor(){
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       songAvailable: data.songAvailable,
@@ -28,13 +28,14 @@ class Loaded extends Component {
       nlpResult2Salience: data.nlp_data2.salience,
       nlpResult3Name: data.nlp_data3.name,
       nlpresult3Salience: data.nlp_data3.salience,
-    }
+    };
   }
 
   render(){
     return(
       <div>
         <Image
+          ref={image => this.image = image}
           image={this.state.image}
           setLoadedBackground={this.props.setLoadedBackground}
           isLoading={this.props.isLoading}
