@@ -9,6 +9,8 @@ class InformationModal extends React.Component {
   constructor(props){
     super(props);
 
+    console.log("this is informationModal props", props)
+
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -44,20 +46,16 @@ class InformationModal extends React.Component {
   }
 
   render() {
-    let hideWhileLoading = {
-      opacity: this.props.isLoading === true ? null : 0
-    }
+    const songAvailable = this.props.songAvailable;
     return (
       <div
         className="modal-wrapper"
         ref={node => {this.node = node;}}>
         <span className='informationIcon'
-          onClick={this.handleClick}
-          style={hideWhileLoading}>
+          onClick={this.handleClick}>
           <img
             src={icon}
             alt="more info"
-            style={hideWhileLoading}
           />
         </span>
         {this.state.modalVisible && (
@@ -113,14 +111,17 @@ class InformationModal extends React.Component {
                     <li>{this.props.nlpData1Name}</li>
                     <li>{this.props.nlpData2Name}</li>
                   </ul>
-                  <p>Spotify was able to find a song with one of the above keywords.</p>
+                  {!songAvailable ? (
+                    <p>Unfortunately, Spotify was not able to find a
+                    song with these terms! Please enjoy David Bowie's Rocket Man and check for tomorrow's Space Jam!</p>
+                  ) : (<p>Spotify was able to find a song with one of the above keywords.</p>)}
               </section>
               <section id="about">
                 <p>Space Jamz is a project that aims to pair images from <a href="https://apod.nasa.gov/apod/astropix.html">NASA's Astronomy Picture
                   of the Day</a> with a corresponding song from Spotify. To determine a corresponding song,
                   the image's title and caption are sent through <a href="https://cloud.google.com/natural-language">Google's Natural Language Processing library</a>.
                 </p>
-                <p>This project was created with loves of love by Sarah Trowbridge, a developer in Seattle, Washington.
+                <p>This project was created with lots of love by Sarah Trowbridge, a developer in Seattle, Washington.
                   Get in touch with her at trowbrsa@gmail.com or @SarahInSEA.
                 </p>
               </section>

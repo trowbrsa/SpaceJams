@@ -13,7 +13,6 @@ const SPOTIFY_ID = process.env.SPOTIFY_ID;
 const SPOTIFY_SECRET = process.env.SPOTIFY_SECRET;
 
 let apiData = {
-  'song_available': 'false'
 };
 
 const callAPI = function() {
@@ -117,22 +116,22 @@ function callSpotifyApi(processedData) {
                   'name': name,
                   'album': album,
                   'artist': artist,
-                  'uri': uri
+                  'uri': uri,
+                  'song_available': 'true'
                 }
 
               jsonFile.writeFile(file, apiData);
               return resolve();
             }
           }
-          // no song found, use default
-          // this isn't working
-          song = '3gdewACMIVMEWVbyb8O9sY';
+          song = 'spotify:track:3gdewACMIVMEWVbyb8O9sY';
           apiData.track_data =
             {
               'name': 'Test',
               'album': 'Look This Up',
               'artist': 'David Bowie',
-              'uri': song
+              'uri': song,
+              song_available: 'false'
             }
           console.log("use default song!");
           jsonFile.writeFile(file, apiData);
