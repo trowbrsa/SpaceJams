@@ -9,8 +9,6 @@ class InformationModal extends React.Component {
   constructor(props){
     super(props);
 
-    console.log("this is informationModal props", props)
-
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);

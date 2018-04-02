@@ -53,11 +53,30 @@ class Container extends Component {
           position: fixed;
           opacity: 1;
           transition: opacity 10s ease-in;
+          visibility: visible;
         `
       );
-      // add this class to the actual black screen
-      console.log("this is intro font", this.introFont);
-      this.container.classList.add('fade-in');
+      this.introFont.setAttribute(
+        'style',
+        `
+          opacity: 0;
+          transition: opacity 3s ease-in;
+        `
+      );
+      this.infoModal.setAttribute(
+        'style',
+        `
+          opacity: 1;
+          transition: opacity 3s ease-in;
+        `
+      );
+      this.track.setAttribute(
+        'style',
+        `
+          opacity: 1;
+          transition: opacity 3s ease-in;
+        `
+      );
 
       this.setState({
         isLoading: false
@@ -68,41 +87,43 @@ class Container extends Component {
   render() {
     return (
       <div
-        ref={introImage => this.introImage = introImage}
         style={{height: '100vh', backgroundColor: '#000'}}>
-        <div ref={container => this.container = container} />
-        {this.state.isLoading ?
-          <div
-            ref={introFont => this.introFont = introFont}>
-            Space Jamz
-          </div>
-        :
-          <div>
-            <Track
-              trackUri={this.state.trackUri}
-              isLoading={this.props.isLoading}
-            />
-            <InformationModal
-              imageTitle={this.state.imageTitle}
-              imageExplanation={this.state.explanation}
-              copyright={this.state.copyright}
-              trackName={this.state.trackName}
-              trackArtist={this.state.trackArtist}
-              trackAlbum={this.state.trackAlbum}
-              show={this.state.isModalOpen}
-              nlpData0Name={this.state.nlpResult0Name}
-              nlpData0Salience={this.state.nlpResult0Salience}
-              nlpData1Name={this.state.nlpResult1Name}
-              nlpData1Salience={this.state.nlpResult1Salience}
-              nlpData2Name={this.state.nlpResult2Name}
-              nlpData2Salience={this.state.nlpResult2Salience}
-              nlpData3Name={this.state.nlpResult2Name}
-              nlpData3Salience={this.state.nlpResult3Salience}
-              songAvailable={this.state.songAvailable}
+        <h1 
+          style={{color: 'white', fontFamily: 'nasaFont', 'opacity': 1}}>
+          Space Jamz
+        </h1>
+        <div 
+          ref={container => this.container = container} 
+          style={{'visiblility': 'hidden', 'opacity': 0}} >
+        </div>
+        <div>
+          <Track
+            ref={track => this.track = track}
+            style={{'opacity': 0}}
+            trackUri={this.state.trackUri}
           />
-          </div>}
-        <h1 style={{color: 'white', fontFamily: 'nasaFont'}}>Space Jamz</h1>
-      </div>
+          <InformationModal
+            ref={infoModal => this.infoModal = infoModal}
+            style={{'opacity': 0}}
+            imageTitle={this.state.imageTitle}
+            imageExplanation={this.state.explanation}
+            copyright={this.state.copyright}
+            trackName={this.state.trackName}
+            trackArtist={this.state.trackArtist}
+            trackAlbum={this.state.trackAlbum}
+            show={this.state.isModalOpen}
+            nlpData0Name={this.state.nlpResult0Name}
+            nlpData0Salience={this.state.nlpResult0Salience}
+            nlpData1Name={this.state.nlpResult1Name}
+            nlpData1Salience={this.state.nlpResult1Salience}
+            nlpData2Name={this.state.nlpResult2Name}
+            nlpData2Salience={this.state.nlpResult2Salience}
+            nlpData3Name={this.state.nlpResult2Name}
+            nlpData3Salience={this.state.nlpResult3Salience}
+            songAvailable={this.state.songAvailable}
+        />
+        </div>
+    </div>
     );
   }
 }
