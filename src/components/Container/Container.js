@@ -21,13 +21,8 @@ class Container extends Component {
       songAvailable: data.track_data.song_available,
       isModalOpen: false,
       nlpResult0Name: data.nlp_data0.name,
-      nlpResult0Salience: data.nlp_data0.salience,
       nlpResult1Name: data.nlp_data1.name,
-      nlpResult1Salience: data.nlp_data1.salience,
       nlpResult2Name: data.nlp_data2.name,
-      nlpResult2Salience: data.nlp_data2.salience,
-      nlpResult3Name: data.nlp_data3.name,
-      nlpresult3Salience: data.nlp_data3.salience,
       loaded: false
     }
     this.image = data.image_data.hdurl;
@@ -51,7 +46,7 @@ class Container extends Component {
           height: auto;
           position: fixed;
           opacity: 1;
-          transition: opacity 10s ease-in;
+          transition: opacity 5s ease-in;
           visibility: visible;
         `
       );
@@ -84,13 +79,8 @@ class Container extends Component {
             trackAlbum={this.state.trackAlbum}
             show={this.state.isModalOpen}
             nlpData0Name={this.state.nlpResult0Name}
-            nlpData0Salience={this.state.nlpResult0Salience}
             nlpData1Name={this.state.nlpResult1Name}
-            nlpData1Salience={this.state.nlpResult1Salience}
             nlpData2Name={this.state.nlpResult2Name}
-            nlpData2Salience={this.state.nlpResult2Salience}
-            nlpData3Name={this.state.nlpResult2Name}
-            nlpData3Salience={this.state.nlpResult3Salience}
             songAvailable={this.state.songAvailable}
         />
         </div>

@@ -112,7 +112,7 @@ class InformationModal extends React.Component {
                   </ul>
                   {!songAvailable ? (
                     <p>Unfortunately, Spotify was not able to find a
-                    song with these terms! Please enjoy David Bowie's Rocket Man and check for tomorrow's Space Jam!</p>
+                    song with these terms! Please enjoy Quad City DJ's Space Jam and check back tomorrow for a new jam!</p>
                   ) : (<p>Spotify was able to find a song with one of the above keywords.</p>)}
               </section>
               <section id="about">
@@ -121,7 +121,7 @@ class InformationModal extends React.Component {
                   the image's title and caption are sent through <a href="https://cloud.google.com/natural-language">Google's Natural Language Processing library</a>.
                 </p>
                 <p>This project was created with lots of love by Sarah Trowbridge, a developer in Seattle, Washington.
-                  Get in touch with her at trowbrsa@gmail.com or @SarahInSEA.
+                  Get in touch with her at trowbrsa@gmail.com or on Twitter at <a href="https://www.twitter.com/SarahInSEA">@SarahInSEA</a>.
                 </p>
               </section>
             </div>

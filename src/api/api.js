@@ -2,6 +2,7 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 import jsonFile from 'jsonfile';
 
+const cron = require('cron');
 const language = require('@google-cloud/language');
 const client = new language.LanguageServiceClient();
 const file = './dailyData.json';
@@ -124,12 +125,12 @@ function callSpotifyApi(processedData) {
               return resolve();
             }
           }
-          song = 'spotify:track:3gdewACMIVMEWVbyb8O9sY';
+          song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
           apiData.track_data =
             {
-              'name': 'Test',
-              'album': 'Look This Up',
-              'artist': 'David Bowie',
+              'name': 'Space Jam',
+              'album': 'Space Jam!',
+              'artist': "Quad City DJ's",
               'uri': song,
               song_available: 'false'
             }
@@ -146,8 +147,18 @@ function callSpotifyApi(processedData) {
   })
 }
 
+
+let job = new cron.CronJob({
+  cronTime: '00 30 1 * * 1-7',
+  onTick(){
+    callAPI();
+  },
+  start: true,
+  timeZone: 'America/Los_Angeles'
+});
+
 const main = () => {
-  callAPI();
+  job.start();
 }
 
 export { main };

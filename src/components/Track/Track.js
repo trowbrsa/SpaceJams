@@ -6,14 +6,10 @@ class Track extends React.Component {
   constructor(props){
     super(props);
   }
-  
-  componentDidUpdate(){
-    console.log("this is this", this)
-  };
 
   render(){
     return(
-        <div className={this.props.loaded ? 'track-container-visible' : 'track-container-hidden'}>
+        <div className={this.props.loaded ? 'track-container' : 'track-container-hidden'}>
         <iframe
           src={`https://embed.spotify.com/?uri=${this.props.trackUri}`}
           width="300"

@@ -19,7 +19,6 @@ p {
   line-height: 1.5;
 }
 
-
 section {
   display: none;
   padding: 20px 0 0;
@@ -31,7 +30,7 @@ input {
 }
 
 a:link {
-  color: #bbb;
+  color: orange;
 }
 
 a:visited {
@@ -39,10 +38,11 @@ a:visited {
 }
 
 a:hover {
+  color: orange;
 }
 
 a:active {
-
+  color: orange;
 }
 
 label {
@@ -94,7 +94,7 @@ input:checked + label {
   right: 2px;
   visibility: visible;
   opacity: 1;
-  transition: opacity 10s ease;
+  transition: opacity 5s ease;
 };
 
 .information-icon-hidden {
@@ -145,22 +145,3 @@ li {
   }
 }
 
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-  .informationIcon {
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-    
-  };
-}
-
-/* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
-/* Styles */
-}
-
-/* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
-/* Styles */
-}
