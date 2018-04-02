@@ -5,8 +5,6 @@ import './track.scss';
 class Track extends React.Component {
   constructor(props){
     super(props);
-    
-    console.log("these are track props", props.trackUri)
   }
   
   render(){

@@ -1,26 +1,17 @@
 h1 {
-  padding: 50px 0;
-  font-weight: 400;
-  text-align: center;
   color: white;
-}
-
-.loading{
-  position: relative;
-  min-height: 100%;
-  min-width: 1024px;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  background-color: black;
-}
-
-.fade-out{
-  opacity: 0;
-}
-
-.fade-in{
+  font-family: nasaFont;
   opacity: 1;
+  position: absolute;
+}
+
+.wrapper {
+  height: 100vh;
+  background-color: #000;
+  position: relative;
+}
+
+.hideUntilLoaded {
+  visiblility: hidden;
+  opacity: 0;
 }

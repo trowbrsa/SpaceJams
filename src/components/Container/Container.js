@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import InformationModal from '../InformationModal/InformationModal';
 import Track from '../Track/Track';
 import data from '../../../dailyData.json';
-import '../../assets/fonts/_nasa.scss';
 import style from './container.scss';
 
 class Container extends Component {
@@ -29,20 +28,17 @@ class Container extends Component {
       nlpResult2Salience: data.nlp_data2.salience,
       nlpResult3Name: data.nlp_data3.name,
       nlpresult3Salience: data.nlp_data3.salience,
-      isLoading: true
+      loaded: false
     }
     this.image = data.image_data.hdurl;
-    
-    this.track = React.createRef();
-    this.infoModal = React.createRef();
+    // this.track = React.createRef();
+    // this.infoModal = React.createRef();
   }
 
   componentDidMount() {
     const backgroundImage = new Image();
     backgroundImage.src = this.image;
     backgroundImage.opacity = 0;
-    
-    console.log("this", this)
 
     backgroundImage.onload = () => {
       this.container.setAttribute(
@@ -61,58 +57,27 @@ class Container extends Component {
           visibility: visible;
         `
       );
-      this.track.current.setAttribute(
-        'style',
-        `
-          opacity: 1;
-          transition: opacity 3s ease-in;
-        `
-      );
-      this.infoModal.current.setAttribute(
-        'style',
-        `
-          opacity: 1;
-          transition: opacity 3s ease-in;
-        `
-      );
       this.setState({
-        isLoading: false
+        loaded: true
       });
     }
   }
 
   render() {
     return (
-      <div 
-        className='wrapper'
-        style={{
-          height: '100vh',
-          backgroundColor: '#000',
-          position: 'relative'
-        }}>
-        <h1 
-          style={{
-            visibility: 'visible', 
-            color: 'white',
-            fontFamily: 'nasaFont',
-            opacity: 1,
-            position: 'absolute'
-          }}>
-          Space Jamz
-        </h1>
+      <div className='wrapper'>
+        <h1>Space Jamz</h1>
         <div 
           ref={container => this.container = container} 
-          style={{'visiblility': 'hidden', 'opacity': 0}} >
+          className='hideUntilLoaded'>
         </div>
         <div>
           <Track
-            ref={track => this.track = track}
-            style={{'opacity': 0}}
+            loading={this.state.loaded}
             trackUri={this.state.trackUri}
           />
           <InformationModal
-            ref={infoModal => this.infoModal = infoModal}
-            style={{'opacity': 0}}
+            loaded={this.state.loaded}
             imageTitle={this.state.imageTitle}
             imageExplanation={this.state.explanation}
             copyright={this.state.copyright}
