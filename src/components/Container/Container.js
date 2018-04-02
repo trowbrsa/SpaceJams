@@ -37,6 +37,7 @@ class Container extends Component {
   componentDidMount() {
     const backgroundImage = new Image();
     backgroundImage.src = this.image;
+    backgroundImage.opacity = 0;
 
     backgroundImage.onload = () => {
       this.container.setAttribute(
@@ -50,10 +51,13 @@ class Container extends Component {
           width: 100%;
           height: auto;
           position: fixed;
+          opacity: 1;
+          transition: opacity 10s ease-in;
         `
       );
       // add this class to the actual black screen
-      //this.backgroundImage.classList.add('fade-out');
+      console.log("this is intro font", this.introFont);
+      this.container.classList.add('fade-in');
 
       this.setState({
         isLoading: false
@@ -63,9 +67,16 @@ class Container extends Component {
 
   render() {
     return (
-      <div style={{height: '100vh', backgroundColor: '#000'}}>
+      <div
+        ref={introImage => this.introImage = introImage}
+        style={{height: '100vh', backgroundColor: '#000'}}>
         <div ref={container => this.container = container} />
-        {this.state.isLoading ? 'Space Jamz' :
+        {this.state.isLoading ?
+          <div
+            ref={introFont => this.introFont = introFont}>
+            Space Jamz
+          </div>
+        :
           <div>
             <Track
               trackUri={this.state.trackUri}
