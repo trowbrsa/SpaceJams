@@ -8,7 +8,6 @@ html, body {
   height: 100vh;
 }
 
-
 h1 {
   padding: 50px 0;
   font-weight: 400;
@@ -89,11 +88,19 @@ input:checked + label {
   letter-spacing: 1.7px;
 };
 
-.informationIcon {
+.information-icon-visible {
   position: absolute;
   bottom: 2px;
   right: 2px;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 10s ease;
 };
+
+.information-icon-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
 
 .imageHeader, .trackHeader, .songOverview{
   font-size: 25px;

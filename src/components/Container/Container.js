@@ -31,8 +31,6 @@ class Container extends Component {
       loaded: false
     }
     this.image = data.image_data.hdurl;
-    // this.track = React.createRef();
-    // this.infoModal = React.createRef();
   }
 
   componentDidMount() {
@@ -66,14 +64,14 @@ class Container extends Component {
   render() {
     return (
       <div className='wrapper'>
-        <h1>Space Jamz</h1>
+        <div className='intro-text'>Space Jamz</div>
         <div 
           ref={container => this.container = container} 
-          className='hideUntilLoaded'>
+          className='hide-until-loaded'>
         </div>
         <div>
           <Track
-            loading={this.state.loaded}
+            loaded={this.state.loaded}
             trackUri={this.state.trackUri}
           />
           <InformationModal
