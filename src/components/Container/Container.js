@@ -32,12 +32,17 @@ class Container extends Component {
       isLoading: true
     }
     this.image = data.image_data.hdurl;
+    
+    this.track = React.createRef();
+    this.infoModal = React.createRef();
   }
 
   componentDidMount() {
     const backgroundImage = new Image();
     backgroundImage.src = this.image;
     backgroundImage.opacity = 0;
+    
+    console.log("this", this)
 
     backgroundImage.onload = () => {
       this.container.setAttribute(
@@ -56,28 +61,20 @@ class Container extends Component {
           visibility: visible;
         `
       );
-      this.introFont.setAttribute(
-        'style',
-        `
-          opacity: 0;
-          transition: opacity 3s ease-in;
-        `
-      );
-      this.infoModal.setAttribute(
+      this.track.current.setAttribute(
         'style',
         `
           opacity: 1;
           transition: opacity 3s ease-in;
         `
       );
-      this.track.setAttribute(
+      this.infoModal.current.setAttribute(
         'style',
         `
           opacity: 1;
           transition: opacity 3s ease-in;
         `
       );
-
       this.setState({
         isLoading: false
       });
@@ -86,10 +83,21 @@ class Container extends Component {
 
   render() {
     return (
-      <div
-        style={{height: '100vh', backgroundColor: '#000'}}>
+      <div 
+        className='wrapper'
+        style={{
+          height: '100vh',
+          backgroundColor: '#000',
+          position: 'relative'
+        }}>
         <h1 
-          style={{color: 'white', fontFamily: 'nasaFont', 'opacity': 1}}>
+          style={{
+            visibility: 'visible', 
+            color: 'white',
+            fontFamily: 'nasaFont',
+            opacity: 1,
+            position: 'absolute'
+          }}>
           Space Jamz
         </h1>
         <div 

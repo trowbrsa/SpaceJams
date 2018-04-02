@@ -11,8 +11,8 @@
     "express": "^4.16.2",
     "jsonfile": "^4.0.0",
     "path": "^0.12.7",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1"
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
