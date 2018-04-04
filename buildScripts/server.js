@@ -2,14 +2,19 @@ import express from 'express';
 import path from 'path';
 import open from 'open';
 import {main} from '../src/api/api.js';
+import dotenv from 'dotenv';
 
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
 
 const compiler = webpack(config);
+dotenv.config();
 
-const port = 3000;
+
 const app = express();
+let port = 8000
+
+console.log("this is the port: ", port)
 
 
 app.use(require('webpack-dev-middleware')(compiler, {
