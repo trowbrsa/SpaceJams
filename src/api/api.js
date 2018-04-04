@@ -159,7 +159,6 @@ let job = new cron.CronJob({
 
 const main = () => {
   job.start();
-  callAPI();
 }
 
 export { main };
