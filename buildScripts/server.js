@@ -29,6 +29,7 @@ app.listen(port, function (error) {
 });
 
 app.get('/', function (req, res) {
+  console.log("in get function");
   main();
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });

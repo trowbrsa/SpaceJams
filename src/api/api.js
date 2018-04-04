@@ -158,7 +158,9 @@ let job = new cron.CronJob({
 });
 
 const main = () => {
-  job.start();
+  callAPI();
+  console.log("in main function");
+  // job.start();
 }
 
 export { main };
