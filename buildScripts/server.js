@@ -12,9 +12,9 @@ dotenv.config();
 
 
 const app = express();
-let port = 8000
+let port = 8000;
 
-console.log("this is the port: ", port)
+console.log("this is the port: ", port);
 
 
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -23,6 +23,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.listen(port, function (error) {
+  console.log("in listen function");
   if(error) {
     console.log(error);
   }
