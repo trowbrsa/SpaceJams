@@ -8,6 +8,8 @@ import config from '../webpack.config.dev';
 const compiler = webpack(config);
 const app = express();
 
+
+
 // app.use(require('webpack-dev-middleware')(compiler, {
 //   noInfo: true,
 //   publicPath: config.output.publicPath
@@ -20,7 +22,7 @@ app.get('/', function (req, res) {
   res.send('Hello');
 });
 
-app.listen(8000, function (error) {
+app.listen(3000, function (error) {
   console.log("in listen function");
   if(error) {
     console.log(error);
