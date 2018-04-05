@@ -8,15 +8,16 @@ import config from '../webpack.config.dev';
 const compiler = webpack(config);
 const app = express();
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
+// app.use(require('webpack-dev-middleware')(compiler, {
+//   noInfo: true,
+//   publicPath: config.output.publicPath
+// }));
 
 app.get('/', function (req, res) {
   console.log("in get function");
-  main();
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  // main();
+  // res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.send('Hello');
 });
 
 app.listen(8000, function (error) {
