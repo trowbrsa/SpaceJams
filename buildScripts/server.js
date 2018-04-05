@@ -13,18 +13,17 @@ app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath
 }));
 
-app.listen(8000, function (error) {
-  console.log("in listen function");
-  if(error) {
-    console.log(error);
-  }
-});
-
 app.get('/', function (req, res) {
   console.log("in get function");
   main();
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+app.listen(8000, function (error) {
+  console.log("in listen function");
+  if(error) {
+    console.log(error);
+  }
+});
 
 
