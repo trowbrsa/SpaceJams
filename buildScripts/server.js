@@ -13,7 +13,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath
 }));
 
-app.listen(port, function (error) {
+app.listen(8000, function (error) {
   console.log("in listen function");
   if(error) {
     console.log(error);
