@@ -16,7 +16,6 @@ const app = express();
 // }));
 
 app.get('/', function (req, res) {
-  console.log("in get function");
   // main();
   // res.sendFile(path.join(__dirname, '../public/index.html'));
   res.send('Hello');
