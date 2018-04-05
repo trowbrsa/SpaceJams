@@ -30,7 +30,7 @@ export default {
         include: __dirname + '/src'
       },
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|ico)$/,
         loader: 'url-loader?limit=8192'
       },
       {

@@ -14,14 +14,11 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.get('/', function (req, res) {
-  console.log("in get function");
   main();
   res.sendFile(path.join(__dirname, '../public/index.html'));
-  // res.send('Hello');
 });
 
 app.listen(3000, function (error) {
-  console.log("in listen function");
   if(error) {
     console.log(error);
   }
