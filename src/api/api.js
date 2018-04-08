@@ -2,7 +2,6 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 import jsonFile from 'jsonfile';
 
-const cron = require('cron');
 const language = require('@google-cloud/language');
 const client = new language.LanguageServiceClient();
 const file = './dailyData.json';
@@ -71,17 +70,17 @@ function callNLPLibrary(title, explanation) {
       }
       return entities;
     })
-    .then(entity => {
-      callSpotifyApi(entity);
+    .then(entities => {
+      callSpotifyApi(entities);
     })
     .catch(err => {
       console.error(err);
     });
 };
 
-function callSpotifyApi(processedData) {
-  let payload = `${SPOTIFY_ID}:${SPOTIFY_SECRET}`;
-  let encodedPayload = new Buffer(payload).toString('base64');
+function callSpotifyApi(textEntities) {
+  const payload = `${SPOTIFY_ID}:${SPOTIFY_SECRET}`;
+  const encodedPayload = new Buffer(payload).toString('base64');
 
   axios({
     url: 'https://accounts.spotify.com/api/token',
@@ -95,36 +94,39 @@ function callSpotifyApi(processedData) {
     },
   })
   .then(response => {
-    let token = response.data.access_token;
-    let getSong = function(entity){
+    const token = response.data.access_token;
+    // getSong is a function that returns a promise
+    // it gets called with processedData.find(getSong);
+    const getSong = function(entity){
+      console.log("this is what textEntities look like", entity);
       return new Promise(function(resolve) {
-        let songSearchTerm = entity.name;
+        const songSearchTerm = entity.name;
         let song = '';
         axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
           headers: { 'Authorization': 'Bearer ' + token }
         })
         .then(response => {
-          if(response.data.tracks.items.length > 0){
-            if('album' in response.data.tracks.items[0]){
-              let trackInfo = response.data.tracks.items[0];
-              let name = trackInfo.name;
-              console.log("success! Track name from Spotify is", name);
-              let album = trackInfo.album.name;
-              let artist = trackInfo.artists[0].name;
-              let uri = trackInfo.uri;
-              apiData.track_data =
-                {
-                  'name': name,
-                  'album': album,
-                  'artist': artist,
-                  'uri': uri,
-                  'song_available': 'true'
-                }
+          let songExists = 'album' in response.data.tracks.items[0];
+          if(songExists){
+            let trackInfo = response.data.tracks.items[0];
+            let name = trackInfo.name;
+            console.log("success! Track name from Spotify is", name);
+            let album = trackInfo.album.name;
+            let artist = trackInfo.artists[0].name;
+            let uri = trackInfo.uri;
+            apiData.track_data =
+              {
+                'name': name,
+                'album': album,
+                'artist': artist,
+                'uri': uri,
+                'song_available': 'true'
+              }
 
-              jsonFile.writeFile(file, apiData);
-              return resolve();
-            }
+            jsonFile.writeFile(file, apiData);
+            return resolve();
           }
+          // no song available, use default song
           song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
           apiData.track_data =
             {
@@ -136,29 +138,17 @@ function callSpotifyApi(processedData) {
             }
           console.log("use default song!");
           jsonFile.writeFile(file, apiData);
-          return reject(song);
+          return resolve();
         })
         .catch(error => {
-          console.log("Error with Spotify", error);
+          reject(console.log("Error with Spotify", error));
         })
       })
     }
-    processedData.find(getSong);
+    // textEntity is an array of entities
+    // texEntities.find() finds the first song that gets resolved
+    textEntities.find(getSong);
   })
 }
 
-
-let job = new cron.CronJob({
-  cronTime: '00 30 1 * * 1-7',
-  onTick(){
-    callAPI();
-  },
-  start: true,
-  timeZone: 'America/Los_Angeles'
-});
-
-const main = () => {
-  job.start();
-}
-
-export { main };
+export {callAPI};

@@ -10,6 +10,7 @@
     "chron": "^0.1.1",
     "dotenv-webpack": "^1.5.4",
     "express": "^4.16.2",
+    "file-system": "^2.2.2",
     "jsonfile": "^4.0.0",
     "path": "^0.12.7",
     "react": "^16.3.0",

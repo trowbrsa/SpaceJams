@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import open from 'open';
-import {main} from '../src/api/api.js';
+import {main} from '../src/api/main.js';
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
 
@@ -23,5 +23,3 @@ app.listen(3000, function (error) {
     console.log(error);
   }
 });
-
-
