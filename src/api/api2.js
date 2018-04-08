@@ -1,6 +1,7 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 import jsonFile from 'jsonfile';
+import blueBird from 'bluebird';
 
 const fs = require('file-system');
 const language = require('@google-cloud/language');
@@ -61,12 +62,7 @@ function googleAPI(nasaData){
             'salience': entities[i].salience
           }
           const content = JSON.stringify(apiData);
-          fs.writeFile(file, content, function(err) {
-            if(err){
-              console.log("error writing file", err);
-            }
-            return resolve(entities);
-          })
+          writeToJsonFile(content);
         }
       })
     })
@@ -89,19 +85,21 @@ function spotifyGetCredentials(textEntities) {
       },
     })
     .then(response => {
-      return resolve(response);
+      const token = response.data.access_token;
+      return resolve(token);
     })
   })
 }
 
-const getSong = function(entity, token){
-  console.log("this is what textEntities look like", entity);
-  const songSearchTerm = entity.name;
+const getSong = function(token, entity){
+  let songSearchTerm = entity;
   let song = '';
   axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
     headers: { 'Authorization': 'Bearer ' + token }
   })
   .then(response => {
+    console.log("this is song response", response.data);
+    // check that there it is not undefined
     let songExists = 'album' in response.data.tracks.items[0];
     if(songExists){
       let trackInfo = response.data.tracks.items[0];
@@ -115,34 +113,34 @@ const getSong = function(entity, token){
         'song_available': 'true'
       }
       const content = JSON.stringify(apiData);
-      fs.writeFile(file, content, function(err) {
-        if(err){
-          console.log("There was an error", err)
-        }
-      })
+      writeToJsonFile(content);
+      console.log("we got to this point, should return true");
       return true;
+    } else {
+      console.log("the entity " + entity + "does not have a song in Spotify");
+      return false;
     }
   })
   .catch(error => {
-    return false;
+    console.log("error! with call to Spotify!", error)
   })
-})
+}
 
 function spotifyGetSong(token, entity) {
-  // getSong is a function that returns a promise
-  // it gets called with processedData.find(getSong);
     return new Promise(function(resolve, reject) {
-      i = 0;
-      spotifyCall = false;
-      while(spotifyCall !== true){
-        spotifyCall = getSong(entity[i]);
+      let i = 0;
+      let songFound = false;
+      while(songFound !== true && i < 2){
+        // use recursion here instead of while loop
+        songFound = getSong(token, entity[i].name);
         i++;
       }
-      if(spotifyCall == true){
+      if(songFound){
         resolve();
       } else {
         // no song available, use default song
-        song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
+        console.log("use default song!");
+        let song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
         apiData.track_data = {
           'name': 'Space Jam',
           'album': 'Space Jam!',
@@ -150,8 +148,18 @@ function spotifyGetSong(token, entity) {
           'uri': song,
           song_available: 'false'
         }
-        console.log("use default song!");
+        const content = JSON.stringify(apiData);
+        writeToJsonFile(content);
+        resolve();
       }
+  })
+}
+
+function writeToJsonFile(content){
+  fs.writeFile(file, content, function(err) {
+    if(err){
+      console.log("There was an error writing to file", err)
+    }
   })
 }
 
@@ -161,10 +169,10 @@ async function callAPI() {
     const googleData = await googleAPI(nasaData);
     const spotifyCreds = await spotifyGetCredentials(googleData);
     const spotifySong = await spotifyGetSong(spotifyCreds, googleData);
-    console.log("here is nasaData======>", nasaData);
-    console.log("here is googleData-===>", googleData);
-    console.log("here is SpotifyCreds===>", spotifyCreds);
-    console.log("here is SpotifySong===>", spotifySong);
+    // console.log("here is nasaData======>", nasaData);
+    // console.log("here is googleData-===>", googleData);
+    // console.log("here is SpotifyCreds===>", spotifyCreds);
+    // console.log("here is SpotifySong===>", spotifySong);
   } catch(e) {
     console.log(e);
   }

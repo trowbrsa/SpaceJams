@@ -122,23 +122,23 @@ function callSpotifyApi(textEntities) {
                 'uri': uri,
                 'song_available': 'true'
               }
-
+            console.log("here is API data", apiData);
+            jsonFile.writeFile(file, apiData);
+            return resolve();
+          } else { // no song available, use default song
+            song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
+            apiData.track_data =
+              {
+                'name': 'Space Jam',
+                'album': 'Space Jam!',
+                'artist': "Quad City DJ's",
+                'uri': song,
+                song_available: 'false'
+              }
+            console.log("use default song!");
             jsonFile.writeFile(file, apiData);
             return resolve();
           }
-          // no song available, use default song
-          song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
-          apiData.track_data =
-            {
-              'name': 'Space Jam',
-              'album': 'Space Jam!',
-              'artist': "Quad City DJ's",
-              'uri': song,
-              song_available: 'false'
-            }
-          console.log("use default song!");
-          jsonFile.writeFile(file, apiData);
-          return resolve();
         })
         .catch(error => {
           reject(console.log("Error with Spotify", error));
