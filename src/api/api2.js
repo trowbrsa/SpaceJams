@@ -1,7 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 import jsonFile from 'jsonfile';
-import bluePromise from 'bluebird';
 
 const fs = require('file-system');
 const language = require('@google-cloud/language');
@@ -94,8 +93,9 @@ function spotifyGetCredentials(textEntities) {
   })
 }
 
-const getSong = function(token, entity){
-  let songSearchTerm = entity;
+function spotifyGetSong(token, entity, songIndex){
+  let songSearchTerm = entity[songIndex].name;
+  console.log("song,", songSearchTerm);
   let song = '';
   axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
     headers: { 'Authorization': 'Bearer ' + token }
@@ -119,10 +119,24 @@ const getSong = function(token, entity){
       const content = JSON.stringify(apiData);
       writeToJsonFile(content);
       console.log("we got to this point, should return true");
-      return true;
     } else {
       console.log("the entity " + entity + "does not have a song in Spotify");
-      return false;
+      if(songIndex >= entity.length){
+        // no song available, use default song
+        console.log("use default song!");
+        let song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
+        apiData.track_data = {
+          'name': 'Space Jam',
+          'album': 'Space Jam!',
+          'artist': "Quad City DJ's",
+          'uri': song,
+          song_available: 'false'
+        }
+        const content = JSON.stringify(apiData);
+        writeToJsonFile(content);
+        resolve();
+      }
+      getSong(token, entity, songIndex++);
     }
   })
   .catch(error => {
@@ -130,82 +144,6 @@ const getSong = function(token, entity){
   })
 }
 
-const promiseWhile = function(condition, action) {
-    var resolver = bluePromise.defer();
-
-    var loop = function() {
-        if (!condition()) return resolver.resolve();
-        return bluePromise.cast(action())
-          .then(loop)
-          .catch(resolver.reject);
-        };
-
-    process.nextTick(loop);
-
-    return resolver.promise;
-};
-
-function spotifyGetSong(token, entity) {
-  console.log("in spotifyGetSong function")
-  let songFound = false;
-  let i = 0;
-  promiseWhile(function(){
-    return songFound = true && i < 2;
-  }, function(){
-      return new bluePromise(function(resolve, reject) {
-        console.log("this is the status of songSong before");
-        songFound = getSong(token, entity[i].name);
-        console.log("this is the status after", songFound);
-        i++;
-        if(songFound){
-          resolve();
-        // } else {
-        //   // no song available, use default song
-        //   console.log("use default song!");
-        //   let song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
-        //   apiData.track_data = {
-        //     'name': 'Space Jam',
-        //     'album': 'Space Jam!',
-        //     'artist': "Quad City DJ's",
-        //     'uri': song,
-        //     song_available: 'false'
-        //   }
-        //   const content = JSON.stringify(apiData);
-        //   writeToJsonFile(content);
-        //   resolve();
-        }
-      })
-  })
-}
-
-
-//     return new Promise(function(resolve, reject) {
-//       let i = 0;
-//       let songFound = false;
-//       while(songFound !== true && i < 2){
-//         // use recursion here instead of while loop
-//         songFound = getSong(token, entity[i].name);
-//         i++;
-//       }
-//       if(songFound){
-//         resolve();
-//       } else {
-//         // no song available, use default song
-//         console.log("use default song!");
-//         let song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
-//         apiData.track_data = {
-//           'name': 'Space Jam',
-//           'album': 'Space Jam!',
-//           'artist': "Quad City DJ's",
-//           'uri': song,
-//           song_available: 'false'
-//         }
-//         const content = JSON.stringify(apiData);
-//         writeToJsonFile(content);
-//         resolve();
-//       }
-//   })
-// }
 
 function writeToJsonFile(content){
   fs.writeFile(file, content, function(err) {
@@ -220,7 +158,7 @@ async function callAPI() {
     const nasaData = await nasaAPI();
     const googleData = await googleAPI(nasaData);
     const spotifyCreds = await spotifyGetCredentials(googleData);
-    const spotifySong = await spotifyGetSong(spotifyCreds, googleData);
+    const spotifySong = await spotifyGetSong(spotifyCreds, googleData, 0);
     // console.log("here is nasaData======>", nasaData);
     // console.log("here is googleData-===>", googleData);
     // console.log("here is SpotifyCreds===>", spotifyCreds);
