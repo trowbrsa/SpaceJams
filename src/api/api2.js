@@ -1,6 +1,5 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import jsonFile from 'jsonfile';
 
 const fs = require('file-system');
 const language = require('@google-cloud/language');
@@ -70,7 +69,6 @@ function googleAPI(nasaData){
 }
 
 function spotifyGetCredentials(textEntities) {
-  console.log("in spotify creds");
   return new Promise(resolve => {
     const payload = `${SPOTIFY_ID}:${SPOTIFY_SECRET}`;
     const encodedPayload = new Buffer(payload).toString('base64');
@@ -95,7 +93,6 @@ function spotifyGetCredentials(textEntities) {
 
 function spotifyGetSong(token, entity, songIndex){
   let songSearchTerm = entity[songIndex].name;
-  console.log("song,", songSearchTerm);
   let song = '';
   axios.get(`https://api.spotify.com/v1/search?q=${songSearchTerm}&type=track`, {
     headers: { 'Authorization': 'Bearer ' + token }
@@ -108,7 +105,7 @@ function spotifyGetSong(token, entity, songIndex){
     if(songExists){
       let trackInfo = response.data.tracks.items[0];
       let name = trackInfo.name;
-      console.log("success! Track name from Spotify is", name);
+      console.log("success! Keyword is" + songSearchTerm + " Track name from Spotify is", name);
       apiData.track_data = {
         'name': name,
         'album': trackInfo.album.name,
@@ -118,30 +115,32 @@ function spotifyGetSong(token, entity, songIndex){
       }
       const content = JSON.stringify(apiData);
       writeToJsonFile(content);
-      console.log("we got to this point, should return true");
     } else {
-      console.log("the entity " + entity + "does not have a song in Spotify");
-      if(songIndex >= entity.length){
-        // no song available, use default song
-        console.log("use default song!");
-        let song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
-        apiData.track_data = {
-          'name': 'Space Jam',
-          'album': 'Space Jam!',
-          'artist': "Quad City DJ's",
-          'uri': song,
-          song_available: 'false'
-        }
-        const content = JSON.stringify(apiData);
-        writeToJsonFile(content);
-        resolve();
+      console.log("the entity " + songSearchTerm + "does not have a song in Spotify");
+      if(songIndex >= 10){ // entity.length
+        useDefaultSong();
       }
-      getSong(token, entity, songIndex++);
+      songIndex += 1;
+      spotifyGetSong(token, entity, songIndex);
     }
   })
   .catch(error => {
     console.log("error! with call to Spotify!", error)
   })
+}
+
+function useDefaultSong(){
+  console.log("use default song!");
+  let song = 'spotify:track:683hRieVmYdAhVA1DkjSAk';
+  apiData.track_data = {
+    'name': 'Space Jam',
+    'album': 'Space Jam!',
+    'artist': "Quad City DJ's",
+    'uri': song,
+    song_available: 'false'
+  }
+  const content = JSON.stringify(apiData);
+  writeToJsonFile(content);
 }
 
 
@@ -161,7 +160,7 @@ async function callAPI() {
     const spotifySong = await spotifyGetSong(spotifyCreds, googleData, 0);
     // console.log("here is nasaData======>", nasaData);
     // console.log("here is googleData-===>", googleData);
-    // console.log("here is SpotifyCreds===>", spotifyCreds);
+    console.log("here is SpotifyCreds===>", spotifyCreds);
     console.log("here is SpotifySong===>", spotifySong);
   } catch(e) {
     console.log(e);
