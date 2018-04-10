@@ -14,11 +14,16 @@ class Container extends Component {
       imageTitle: data.image_data.title,
       explanation: data.image_data.explanation,
       copyright: data.image_data.copyright,
+      trackUri: data.track_data.uri,
+      trackName: data.track_data.name,
+      trackAlbum: data.track_data.album,
+      trackArtist: data.track_data.artist,
+      songAvailable: data.track_data.song_available,
       isModalOpen: false,
       nlpResult0Name: data.nlp_data0.name,
       nlpResult1Name: data.nlp_data1.name,
       nlpResult2Name: data.nlp_data2.name,
-      loaded: false,
+      loaded: false
     }
     this.image = data.image_data.hdurl;
   }
@@ -55,19 +60,23 @@ class Container extends Component {
     return (
       <div className='wrapper'>
         <div className='intro-text'>Space Jamz</div>
-        <div
-          ref={container => this.container = container}
+        <div 
+          ref={container => this.container = container} 
           className='hide-until-loaded'>
         </div>
         <div>
           <Track
             loaded={this.state.loaded}
+            trackUri={this.state.trackUri}
           />
           <InformationModal
             loaded={this.state.loaded}
             imageTitle={this.state.imageTitle}
             imageExplanation={this.state.explanation}
             copyright={this.state.copyright}
+            trackName={this.state.trackName}
+            trackArtist={this.state.trackArtist}
+            trackAlbum={this.state.trackAlbum}
             show={this.state.isModalOpen}
             nlpData0Name={this.state.nlpResult0Name}
             nlpData1Name={this.state.nlpResult1Name}
